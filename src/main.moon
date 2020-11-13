@@ -1,7 +1,7 @@
 import Vec2, overlap, overlap_v from require "util"
 import Player from require "player"
 
-export gfx = love.graphics
+gfx = love.graphics
 
 player = Player!
 
