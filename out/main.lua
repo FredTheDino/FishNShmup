@@ -5,6 +5,11 @@ do
 end
 local Player
 Player = require("player").Player
+local Entity, World
+do
+  local _obj_0 = require("world")
+  Entity, World = _obj_0.Entity, _obj_0.World
+end
 local gfx = love.graphics
 local player = Player()
 local Circle
@@ -38,15 +43,19 @@ do
   _base_0.__class = _class_0
   Circle = _class_0
 end
-love.load = function(arg) end
+love.load = function(arg)
+  return World:add_entity(Entity())
+end
 love.update = function(dt)
-  return player:update(dt)
+  player:update(dt)
+  return World:update(dt)
 end
 love.draw = function()
   local t = love.timer.getTime()
   local a = Circle(100, 100, math.sin(t) * 30)
   local b = Circle(120, 100, math.sin(t) * 30)
   player:draw(gfx)
+  World:draw(gfx)
   if a:overlap(b) then
     a:draw(100, 0, 0)
     return b:draw(100, 0, 0)
