@@ -28,11 +28,13 @@ export class World
 
     @draw: (gfx) =>
         for e in *@@entities
-            e\draw gfx
+            if e.alive
+                e\draw gfx
 
     @update: (delta) =>
         for e in *@@entities
-            e\update delta
+            if e.alive
+                e\update delta
         @@\filter_alive!
 
     @filter_alive: =>
