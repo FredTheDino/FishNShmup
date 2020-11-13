@@ -45,6 +45,8 @@ export class World
 
     @test_collision: (a) =>
         for b in *@@entities
+            if a == b
+                continue
             if entity_overlap a, b
                 a\on_collision b
                 b\on_collision a

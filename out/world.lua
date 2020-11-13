@@ -100,10 +100,21 @@ do
   self.test_collision = function(self, a)
     local _list_0 = self.__class.entities
     for _index_0 = 1, #_list_0 do
-      local b = _list_0[_index_0]
-      if entity_overlap(a, b) then
-        a:on_collision(b)
-        b:on_collision(a)
+      local _continue_0 = false
+      repeat
+        local b = _list_0[_index_0]
+        if a == b then
+          _continue_0 = true
+          break
+        end
+        if entity_overlap(a, b) then
+          a:on_collision(b)
+          b:on_collision(a)
+        end
+        _continue_0 = true
+      until true
+      if not _continue_0 then
+        break
       end
     end
     return self.__class:filter_alive()
