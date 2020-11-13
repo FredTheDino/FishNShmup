@@ -1,12 +1,14 @@
 import Vec2 from require "util"
+import Entity from require "world"
 
 keyboard = love.keyboard
 
-export class Player
+export class Player extends Entity
     new: =>
         @pos = Vec2!
         @radius = 32
         @speed = 256
+        @alive = true
 
     draw: (gfx) =>
         gfx.setColor 255, 0, 0

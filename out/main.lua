@@ -11,7 +11,6 @@ do
   Entity, World = _obj_0.Entity, _obj_0.World
 end
 local gfx = love.graphics
-local player = Player()
 local Circle
 do
   local _class_0
@@ -44,17 +43,16 @@ do
   Circle = _class_0
 end
 love.load = function(arg)
-  return World:add_entity(Entity())
+  World:add_entity(Entity())
+  return World:add_entity(Player())
 end
 love.update = function(dt)
-  player:update(dt)
   return World:update(dt)
 end
 love.draw = function()
   local t = love.timer.getTime()
   local a = Circle(100, 100, math.sin(t) * 30)
   local b = Circle(120, 100, math.sin(t) * 30)
-  player:draw(gfx)
   World:draw(gfx)
   if a:overlap(b) then
     a:draw(100, 0, 0)

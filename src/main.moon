@@ -4,8 +4,6 @@ import Entity, World from require "world"
 
 gfx = love.graphics
 
-player = Player!
-
 class Circle
     new: (x, y, r) =>
         @pos = Vec2(x, y)
@@ -21,9 +19,9 @@ class Circle
 
 love.load = (arg) ->
     World\add_entity Entity!
+    World\add_entity Player!
 
 love.update = (dt) ->
-    player\update dt
     World\update dt
 
 
@@ -31,7 +29,6 @@ love.draw = () ->
     t = love.timer.getTime!
     a = Circle 100, 100, math.sin(t) * 30
     b = Circle 120, 100, math.sin(t) * 30
-    player\draw gfx
     World\draw gfx
 
     if a\overlap b
