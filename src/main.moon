@@ -1,6 +1,9 @@
 import Vec2, overlap, overlap_v from require "util"
+import Player from require "player"
 
 export gfx = love.graphics
+
+player = Player!
 
 class Circle
     new: (x, y, r) =>
@@ -18,11 +21,14 @@ class Circle
 love.load = (arg) ->
 
 love.update = (dt) ->
+    player\update dt
+
 
 love.draw = () ->
     t = love.timer.getTime!
     a = Circle 100, 100, math.sin(t) * 30
     b = Circle 120, 100, math.sin(t) * 30
+    player\draw gfx
 
     if a\overlap b
         a\draw 100, 0, 0
