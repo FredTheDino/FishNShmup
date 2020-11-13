@@ -11,6 +11,7 @@ export class Shot extends Entity
         @pos = pos
         @vel = dir\normalized!\scale(vel)
         @radius = 10
+        @lifetime = 200
         --@acc = 0
 
     draw: (gfx) =>
@@ -20,6 +21,9 @@ export class Shot extends Entity
     update: (delta) =>
         @pos = @pos\add @vel\scale delta
         World\test_collision @
+        @lifetime -= 1
+        if @lifetime < 0
+            @alive = false
 
     on_collision: (other) =>
         if other.__class == Player
