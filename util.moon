@@ -1,3 +1,5 @@
+export *
+
 class Vec2
     new: (x = 0, y = 0) =>
         @x = x
@@ -24,4 +26,12 @@ class Vec2
     normalized: =>
         @div @length!
 
-{ :Vec2 }
+overlap = (xa, ya, ra, xb, yb, ca) ->
+    overlap_v Vec2(xa, ya), ra, Vec2(xb, yb), ca
+
+overlap_v = (ca, ra, cb, rb) ->
+    dist = (ca\sub cb)\length_squared!
+    radi = (ra + rb) * (ra + rb)
+    dist <= radi
+
+{ :Vec2, :overlap, :overlap_v }

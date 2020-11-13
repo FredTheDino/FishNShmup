@@ -1,4 +1,3 @@
-local Vec2
 do
   local _class_0
   local _base_0 = {
@@ -49,6 +48,16 @@ do
   _base_0.__class = _class_0
   Vec2 = _class_0
 end
+overlap = function(xa, ya, ra, xb, yb, ca)
+  return overlap_v(Vec2(xa, ya), ra, Vec2(xb, yb), ca)
+end
+overlap_v = function(ca, ra, cb, rb)
+  local dist = (ca:sub(cb)):length_squared()
+  local radi = (ra + rb) * (ra + rb)
+  return dist <= radi
+end
 return {
-  Vec2 = Vec2
+  Vec2 = Vec2,
+  overlap = overlap,
+  overlap_v = overlap_v
 }
