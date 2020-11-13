@@ -5,7 +5,7 @@ do
 end
 local Player
 Player = require("player").Player
-gfx = love.graphics
+local gfx = love.graphics
 local player = Player()
 local Circle
 do

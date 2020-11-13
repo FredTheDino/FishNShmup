@@ -1,15 +1,27 @@
 import Vec2 from require "util"
 
+keyboard = love.keyboard
+
 export class Player
     new: =>
         @pos = Vec2!
         @radius = 32
+        @speed = 256
 
     draw: (gfx) =>
         gfx.setColor 255, 0, 0
         gfx.circle "fill", @pos.x, @pos.y, @radius, 20
 
     update: (delta) =>
-        @pos = @pos\add(Vec2(1, 1))
+        dpos = Vec2!
+        if keyboard.isDown "a"
+            dpos.x += -1
+        if keyboard.isDown "w"
+            dpos.y += -1
+        if keyboard.isDown "s"
+            dpos.y += 1
+        if keyboard.isDown "d"
+            dpos.x += 1
+        @pos = @pos\add(dpos\scale(delta * @speed))
 
 { :Player }
