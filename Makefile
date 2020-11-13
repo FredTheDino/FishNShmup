@@ -1,6 +1,7 @@
 OUTDIR=out/
 
 build:
+	rm -rf $(OUTDIR)/*
 	mkdir -p $(OUTDIR)
 	moonc -t $(OUTDIR) *.moon 
 
