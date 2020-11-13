@@ -15,9 +15,6 @@ local Circle
 do
   local _class_0
   local _base_0 = {
-    overlap = function(self, cb)
-      return overlap_v(self.pos, self.r, cb.pos, cb.r)
-    end,
     draw = function(self, r, g, b)
       gfx.setColor(r, g, b)
       return gfx.circle("fill", self.pos.x, self.pos.y, self.r, 20)
@@ -53,12 +50,5 @@ love.draw = function()
   local t = love.timer.getTime()
   local a = Circle(100, 100, math.sin(t) * 30)
   local b = Circle(120, 100, math.sin(t) * 30)
-  World:draw(gfx)
-  if a:overlap(b) then
-    a:draw(100, 0, 0)
-    return b:draw(100, 0, 0)
-  else
-    a:draw(0, 100, 100)
-    return b:draw(100, 0, 100)
-  end
+  return World:draw(gfx)
 end

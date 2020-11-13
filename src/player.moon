@@ -1,13 +1,36 @@
 import Vec2 from require "util"
-import Entity from require "world"
+import Entity, World from require "world"
+
+local Player
 
 keyboard = love.keyboard
+
+export class Shot extends Entity
+    new: (pos, dir, vel) =>
+        super!
+        @pos = pos
+        @vel = dir\normalized!\scale(vel)
+        @radius = 10
+        --@acc = 0
+
+    draw: (gfx) =>
+        gfx.setColor 0, 0, 255
+        gfx.circle "fill", @pos.x, @pos.y, @radius, 20
+
+    update: (delta) =>
+        @pos = @pos\add @vel\scale delta
+        World\test_collision @
+
+    on_collision: (other) =>
+        if other.__class == Player
+            print "hit player"
+        if other.__class == Entity
+            other.alive = false
 
 export class Player extends Entity
     new: =>
         super!
         @pos = Vec2!
-        @radius = 32
         @speed = 256
 
     draw: (gfx) =>
@@ -24,6 +47,8 @@ export class Player extends Entity
             dpos.y += 1
         if keyboard.isDown "d"
             dpos.x += 1
+        if keyboard.isDown "space"
+            World\add_entity Shot @pos, Vec2(1, 0), 300
         @pos = @pos\add(dpos\scale(delta * @speed))
 
 { :Player }
