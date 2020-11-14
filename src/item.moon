@@ -18,8 +18,9 @@ export class Item extends Entity
     on_collision: =>
 
 export class GenericPickupItem extends Item
-    on_collision: =>
-        @alive = false
-        print("item picked up")
+    on_collision: (other) =>
+        if other.player
+            @alive = false
+            print("item picked up")
 
 { :Item, :GenericPickupItem }

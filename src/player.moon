@@ -26,13 +26,14 @@ export class Shot extends Entity
             @alive = false
 
     on_collision: (other) =>
-        @alive = false
-        if other.__class == Player or other.__class == Enemy
+        if other.player or other.enemy
+            @alive = false
             other\damage(1)
 
 export class Player extends Entity
     new: =>
         super!
+        @player = true
         @pos = Vec2!
         @draw_offset = Vec2(48, -40)
         @speed = 256

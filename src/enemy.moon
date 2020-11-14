@@ -3,6 +3,7 @@ import Shot from require "player"
 export class Enemy extends Entity
     new: (pos, vel) =>
         super!
+        @enemy = true
         @pos = pos
         @vel = vel
         @fire_rate = 0.2
