@@ -4,7 +4,7 @@ RES=res/
 build:
 	rm -rf $(OUT)/*
 	mkdir -p $(OUT)
-	moonc -t $(OUT) src/*.moon 
+	moonc -t $(OUT) src/*.moon
 	mv $(OUT)/src/* $(OUT)/
 	cp $(RES)/* $(OUT)/
 

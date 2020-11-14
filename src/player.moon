@@ -49,7 +49,7 @@ export class Player extends Entity
         gfx.setColor 255, 255, 255
         gfx.draw @img, @pos.x + @draw_offset.x, @pos.y + @draw_offset.y, math.pi/2
 
-    fire: (line) =>
+    fire: =>
         @shoottimer = @fire_rate
         World\add_entity Shot @pos, Vec2(1, 0), 500, @radius + 5
 
