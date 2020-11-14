@@ -7,6 +7,10 @@ export class Fishing
     @cursor_speed = 0.5
     @total_t = 0
 
+    @bar_width = 0.05
+    @bar_start = 0.5 - @bar_width
+    @bar_end = 0.5 + @bar_width
+
     @top_x = 250
     @top_y = 250
     @box_w = 250
@@ -31,15 +35,15 @@ export class Fishing
     @draw: =>
         -- left outer
         gfx.setColor 255, 0, 0
-        gfx.rectangle "fill", @@top_x, @@top_y, @@box_w * 0.4, @@box_h
+        gfx.rectangle "fill", @@top_x, @@top_y, @@box_w * @@bar_start, @@box_h
 
         -- middle
         gfx.setColor 0, 150, 0
-        gfx.rectangle "fill", @@top_x + @@box_w * 0.4, @@top_y, @@box_w * 0.2, @@box_h
+        gfx.rectangle "fill", @@top_x + @@box_w * @@bar_start, @@top_y, @@box_w * @@bar_end, @@box_h
 
         -- right outer
         gfx.setColor 255, 0, 0
-        gfx.rectangle "fill", @@top_x + @@box_w * 0.6, @@top_y, @@box_w * 0.4, @@box_h
+        gfx.rectangle "fill", @@top_x + @@box_w * @@bar_end, @@top_y, @@box_w * @@bar_start, @@box_h
 
         -- outer box
         gfx.setColor 0, 0, 0
