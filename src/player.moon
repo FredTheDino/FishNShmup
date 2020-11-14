@@ -25,16 +25,23 @@ export class Player extends Entity
         @shield_recharge = 0.2 -- shield recharged per second
         @shield_damage_strength = 0.2 -- how much shield to lose per dmg
 
+        @shield_bar_pos_dx = 0
+        @shield_bar_pos_dy = -30
+        @shield_bar_width = 80
+
     draw: =>
         super\draw!
         gfx.draw @img, @pos.x + @draw_offset.x, @pos.y + @draw_offset.y, math.pi/2
 
-        --TODO draw bar
         if @shield_on or @shield_flashing_cur_status
-            gfx.setColor 255, 255, 255, @shield * 0.7
+            gfx.setColor 1, 1, 1, 0.2 + @shield * 0.5
             gfx.draw @shield_img, @pos.x + @draw_offset.x, @pos.y + @draw_offset.y, math.pi/2
+            gfx.setColor 0.5, 0.5, 1, 1
+            gfx.rectangle "fill", @pos.x - 40, @pos.y + @draw_offset.y - 20, 80 * @shield, 10
+        gfx.setColor 0, 0, 0
+        gfx.rectangle "line", @pos.x - 40, @pos.y + @draw_offset.y - 20, 80, 10
 
-        gfx.setColor 255, 255, 255, 1
+        gfx.setColor 1.0, 1.0, 1.0
         gfx.draw @engine_particles
 
     fire: =>
@@ -48,6 +55,7 @@ export class Player extends Entity
             @shield -= dmg * @shield_damage_strength
             if @shield < 0
                 @shield_on = false
+                @shield = 0
         else
             @health -= dmg
             if @health < 0
