@@ -13,10 +13,10 @@ export class World
             if e.alive
                 e\draw!
 
-    @update: (delta) =>
+    @update: (delta, total_time) =>
         for e in *@@entities
             if e.alive
-                e\update delta
+                e\update delta, total_time
         @@\filter_alive!
 
     @filter_alive: =>

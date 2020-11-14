@@ -15,6 +15,18 @@ require "fishing"
 gfx = love.graphics
 keyboard = love.keyboard
 
+total_t = 0
+
+bg_timer = 0.0
+bg_timer_lo = 0.2
+bg_timer_hi = 5.0
+spawn_background = (delta) ->
+    bg_timer -= delta
+    if bg_timer < 0
+        bg_timer = random_real bg_timer_lo, bg_timer_hi
+        for i = 0, math.random(3, 10)
+            World\add_entity BGItem "bg_part", 10
+
 prev_f = false --TODO framework?
 
 love.load = (arg) ->
@@ -40,6 +52,7 @@ love.load = (arg) ->
 next_spawn = 0
 time_between_spawn = 4
 love.update = (dt) ->
+    total_t += dt
     if not prev_f and keyboard.isDown "f"
         prev_f = true
         World.gone_fishing = not World.gone_fishing
@@ -54,7 +67,7 @@ love.update = (dt) ->
             World\add_entity ShootingEnemy Vec2(love.graphics.getWidth!, 100), Vec2(-100, math.random(-100, 100))
 
         Background\update dt
-        World\update dt
+        World\update dt, total_t
         Combo\update dt
 
 love.draw = ->
