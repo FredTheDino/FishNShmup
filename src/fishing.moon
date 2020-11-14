@@ -64,3 +64,6 @@ export class Fishing
         gfx.setColor 0, 0, 0
         current_middle = @@top_x + @@box_w * @@current
         gfx.rectangle "fill", current_middle - 8, @@top_y, 16, @@box_h
+
+        -- score
+        gfx.print @@score, 50, 50
