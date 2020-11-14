@@ -1,9 +1,8 @@
 import Vec2 from require "util"
 import Entity, World from require "world"
 
-local Player
-
 keyboard = love.keyboard
+gfx = love.graphics
 
 export class Shot extends Entity
     new: (pos, dir, vel, offset = 0) =>
@@ -42,11 +41,17 @@ export class Player extends Entity
         @health = 3
         @img = Assets\get "ship.png"
 
-    draw: (gfx) =>
+        @engine_particles = gfx.newParticleSystem Assets\get "tmp_engine.png"
+        @engine_particles\setParticleLifetime 1, 2
+        @engine_particles\setEmissionRate 5
+        @engine_particles\start!
+
+    draw: =>
         gfx.setColor 255, 0, 0
         gfx.circle "fill", @pos.x, @pos.y, @radius, 20
         gfx.setColor 255, 255, 255
         gfx.draw @img, @pos.x + @draw_offset.x, @pos.y + @draw_offset.y, math.pi/2
+        gfx.draw @engine_particles
 
     fire: =>
         if @shoottimer > 0
@@ -60,6 +65,7 @@ export class Player extends Entity
             @alive = false
 
     update: (delta) =>
+        @engine_particles\update delta
         dpos = Vec2!
         if keyboard.isDown "a"
             dpos.x += -1
@@ -71,10 +77,11 @@ export class Player extends Entity
             dpos.x += 1
 
         @shoottimer -= delta
-        if  keyboard.isDown "space"
+        if keyboard.isDown "space"
             @fire!
             
         @pos = @pos\add(dpos\scale(delta * @speed))
+        @engine_particles\setPosition @pos.x, @pos.y
 
         World\test_collision @
 
