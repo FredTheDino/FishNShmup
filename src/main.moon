@@ -3,6 +3,7 @@ require "util"
 
 require "world"
 require "entity"
+require "combo"
 require "shot"
 require "player"
 require "enemy"
@@ -26,6 +27,7 @@ spawn_background = (delta) ->
 
 love.load = (arg) ->
     Assets\load!
+    Combo\reset!
     World\add_entity Player!
     World\add_entity GenericPickupItem!
     gfx.setBackgroundColor 238 / 255, 223 / 255, 203 / 255
@@ -40,8 +42,10 @@ love.update = (dt) ->
     spawn_background dt
         
     World\update dt
+    Combo\update dt
 
 
 love.draw = ->
     t = love.timer.getTime!
     World\draw!
+    Combo\draw!

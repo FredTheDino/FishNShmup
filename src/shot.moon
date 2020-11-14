@@ -1,15 +1,14 @@
 gfx = love.graphics
 
 export class Shot extends Entity
-    new: (pos, dir, vel, friendly, offset = 0) =>
+    new: (pos, dir, vel, owner, offset = 0) =>
         super!
         @radius = 10
         @lifetime = 100
         @pos = pos\add dir\scale offset + @radius
         @vel = dir\normalized!\scale(vel)
-        @friendly = friendly
+        @owner = owner
         @color = { 0, 0, 255 }
-        --@acc = 0
 
     update: (delta) =>
         @pos = @pos\add @vel\scale delta
@@ -18,6 +17,7 @@ export class Shot extends Entity
             @alive = false
 
     on_collision: (other) =>
-        if (other.player and not @friendly) or (other.enemy and @friendly)
+        if (other.player and not @owner.player) or (other.enemy and not @owner.enemy)
+            @owner\landed_hit!
             @alive = false
             other\damage(1)

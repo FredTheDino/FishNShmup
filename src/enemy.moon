@@ -18,6 +18,9 @@ class Enemy extends Entity
         if @health < 0
             @alive = false
 
+    landed_hit: =>
+        Combo\reset!
+
     update: (delta) =>
         @pos = @pos\add @vel\scale delta
         @shoottimer -= delta
@@ -39,4 +42,4 @@ export class ShootingEnemy extends Enemy
         if @shoottimer > 0
             return
         @shoottimer = @fire_rate
-        World\add_entity Shot @pos, Vec2(-1, 0), 500, false, @radius + 5
+        World\add_entity Shot @pos, Vec2(-1, 0), 500, @, @radius + 5

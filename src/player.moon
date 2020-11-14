@@ -27,12 +27,15 @@ export class Player extends Entity
         if @shoottimer > 0
             return
         @shoottimer = @fire_rate
-        World\add_entity Shot @pos, Vec2(1, 0), 500, true, @radius + 5
+        World\add_entity Shot @pos, Vec2(1, 0), 500, @, @radius + 5
 
     damage: (dmg) =>
         @health -= dmg
         if @health < 0
             @alive = false
+
+    landed_hit: =>
+        Combo\increase 10
 
     update: (delta) =>
         @engine_particles\update delta
