@@ -135,7 +135,7 @@ do
       self.shoottimer = 0
       self.fire_rate = 0.2
       self.health = 3
-      self.img = love.graphics.newImage("ship.png")
+      self.img = Assets:get("ship.png")
     end,
     __base = _base_0,
     __name = "Player",

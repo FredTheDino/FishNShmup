@@ -1,3 +1,5 @@
+local Assets
+Assets = require("assets").Assets
 local Vec2, overlap, overlap_v
 do
   local _obj_0 = require("util")
@@ -44,6 +46,7 @@ do
   Circle = _class_0
 end
 love.load = function(arg)
+  Assets:load()
   World:add_entity(Entity())
   World:add_entity(Player())
   return World:add_entity(GenericPickupItem())

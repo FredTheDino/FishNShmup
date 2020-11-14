@@ -39,7 +39,7 @@ export class Player extends Entity
         @shoottimer = 0
         @fire_rate = 0.2
         @health = 3
-        @img = love.graphics.newImage("ship.png")
+        @img = Assets\get "ship.png"
 
     draw: (gfx) =>
         gfx.setColor 255, 0, 0

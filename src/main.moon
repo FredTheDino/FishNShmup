@@ -1,3 +1,4 @@
+import Assets from require "assets"
 import Vec2, overlap, overlap_v from require "util"
 import Player from require "player"
 import ShootingEnemy from require "enemy"
@@ -17,6 +18,7 @@ class Circle
 
 
 love.load = (arg) ->
+    Assets\load!
     World\add_entity Entity!
     World\add_entity Player!
     World\add_entity GenericPickupItem!
