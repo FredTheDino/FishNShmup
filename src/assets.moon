@@ -25,7 +25,9 @@ export class Assets
         @load_img("tmp_engine.png")
 
     @load_img: (name) =>
-        @load_ass name, love.graphics.newImage name
+        img = love.graphics.newImage name
+        img\setFilter "nearest", "nearest"
+        @load_ass name, img
 
     @load_ass: (name, a) =>
         assert @@assets[name] == nil, "Loading asset "..name.." twice!"

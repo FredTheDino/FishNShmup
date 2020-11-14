@@ -26,6 +26,7 @@ love.load = (arg) ->
     World\add_entity Entity!
     World\add_entity Player!
     World\add_entity GenericPickupItem!
+    gfx.setBackgroundColor 238 / 255, 223 / 255, 203 / 255
 
 next_spawn = 0
 time_between_spawn = 4
