@@ -8,11 +8,8 @@ export class Shot extends Entity
         @pos = pos\add dir\scale offset + @radius
         @vel = dir\normalized!\scale(vel)
         @friendly = friendly
+        @color = { 0, 0, 255 }
         --@acc = 0
-
-    draw: =>
-        gfx.setColor 0, 0, 255
-        gfx.circle "fill", @pos.x, @pos.y, @radius, 20
 
     update: (delta) =>
         @pos = @pos\add @vel\scale delta

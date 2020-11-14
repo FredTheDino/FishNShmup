@@ -9,6 +9,7 @@ class Enemy extends Entity
         @fire_rate = 0.2
         @shoottimer = 0
         @health = 3
+        @color = { 255, 0, 255 }
 
     fire: =>
 
@@ -16,10 +17,6 @@ class Enemy extends Entity
         @health -= dmg
         if @health < 0
             @alive = false
-
-    draw: =>
-        gfx.setColor 255, 0, 255
-        gfx.circle "fill", @pos.x, @pos.y, @radius, 20
 
     update: (delta) =>
         @pos = @pos\add @vel\scale delta

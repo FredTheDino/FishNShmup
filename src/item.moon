@@ -4,13 +4,11 @@ class Item extends Entity
     new: =>
         super!
         @item = true
+        @radius = 10
         @pos = Vec2 600, 300
         math.randomseed(os.time())
         @dir = (Vec2 random_real(-1, -0.5), random_real(-1, 1))\normalized!
-
-    draw: =>
-        gfx.setColor 0, 255, 255
-        gfx.circle "fill", @pos.x, @pos.y, 10, 20
+        @color = { 0, 255, 255 }
 
     update: (delta) =>
         @pos = @pos\add @dir\scale delta*100

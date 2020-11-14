@@ -20,9 +20,6 @@ export class Player extends Entity
 
     draw: =>
         super\draw!
-        gfx.setColor 255, 0, 0
-        gfx.circle "fill", @pos.x, @pos.y, @radius, 20
-        gfx.setColor 255, 255, 255
         gfx.draw @img, @pos.x + @draw_offset.x, @pos.y + @draw_offset.y, math.pi/2
         gfx.draw @engine_particles
 

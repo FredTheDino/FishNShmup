@@ -9,10 +9,12 @@ export class Entity
         @pos = Vec2 200, 200
         @radius = 32
         @alive = true
+        @color = { 255, 0, 0 }
 
     draw: =>
-        gfx.setColor 0, 255, 0
+        gfx.setColor @color[1], @color[2], @color[3]
         gfx.circle "line", @pos.x, @pos.y, @radius, 20
+        gfx.setColor 255, 255, 255
 
     update: (delta) =>
 
