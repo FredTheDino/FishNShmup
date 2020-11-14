@@ -19,21 +19,18 @@ love.load = (arg) ->
     World\add_entity GenericPickupItem!
     gfx.setBackgroundColor 238 / 255, 223 / 255, 203 / 255
 
-    -- --TODO something more like this?
-    -- for i = 0, math.random(3, 10)
-    --     World\add_entity BGItem "bg_part", 10
-
-    -- for i = 0, math.random(3, 10)
-    --     World\add_entity BGItem "bg_cloud", 10
-    Background\add_bg_layer Background "bg_cloud_1.png", 1
-    Background\add_bg_layer Background "bg_cloud_2.png", 1
-    Background\add_bg_layer Background "bg_cloud_3.png", 1
-    Background\add_bg_layer Background "bg_cloud_4.png", 1
-    Background\add_bg_layer Background "bg_part_1.png"
-    Background\add_bg_layer Background "bg_part_2.png"
-    Background\add_bg_layer Background "bg_part_3.png"
-    Background\add_bg_layer Background "bg_part_4.png"
-    Background\add_bg_layer Background "bg_part_5.png"
+    for i = 1, 4
+        Background\add_bg_layer Background "bg_cloud_"..i..".png",
+                                           1.2,
+                                           700,
+                                           1200,
+                                           1.8
+    for i = 1, 5
+        Background\add_bg_layer Background "bg_part_"..i..".png",
+                                           1.2,
+                                           120,
+                                           120,
+                                           1.0
 
 next_spawn = 0
 time_between_spawn = 4
@@ -41,7 +38,8 @@ love.update = (dt) ->
     next_spawn -= dt
     if next_spawn < 0
         next_spawn = time_between_spawn
-        World\add_entity ShootingEnemy Vec2(love.graphics.getWidth!, 100), Vec2(-100, math.random(-100, 100))
+        World\add_entity ShootingEnemy Vec2(love.graphics.getWidth!, 100),
+                                       Vec2(-100, math.random(-100, 100))
 
     Background\update dt
     World\update dt
