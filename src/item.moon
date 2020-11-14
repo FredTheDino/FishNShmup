@@ -1,7 +1,4 @@
-import Entity from require "world"
-import random_real from require "util"
-
-export class Item extends Entity
+class Item extends Entity
     new: =>
         super!
         @pos = Vec2 600, 300
@@ -22,5 +19,3 @@ export class GenericPickupItem extends Item
         if other.player
             @alive = false
             print("item picked up")
-
-{ :Item, :GenericPickupItem }

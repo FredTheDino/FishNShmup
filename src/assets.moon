@@ -36,5 +36,3 @@ export class Assets
     @get: (name) =>
         assert @@assets[name], "Invalid asset name "..name.."."
         @@assets[name]
-
-{ :Assets }

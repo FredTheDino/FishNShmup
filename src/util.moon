@@ -1,6 +1,4 @@
-export *
-
-class Vec2
+export class Vec2
     new: (x = 0, y = 0) =>
         @x = x
         @y = y
@@ -26,15 +24,13 @@ class Vec2
     normalized: =>
         @div @length!
 
-overlap = (xa, ya, ra, xb, yb, ca) ->
+export overlap = (xa, ya, ra, xb, yb, ca) ->
     overlap_v Vec2(xa, ya), ra, Vec2(xb, yb), ca
 
-overlap_v = (ca, ra, cb, rb) ->
+export overlap_v = (ca, ra, cb, rb) ->
     dist = (ca\sub cb)\length_squared!
     radi = (ra + rb) * (ra + rb)
     dist <= radi
 
-random_real = (lo, hi) ->
+export random_real = (lo, hi) ->
     (hi - lo) * math.random() + lo
-
-{ :Vec2, :overlap, :overlap_v, :random_real }

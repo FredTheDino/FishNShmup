@@ -1,6 +1,4 @@
-import Shot from require "player"
-
-export class Enemy extends Entity
+class Enemy extends Entity
     new: (pos, vel) =>
         super!
         @enemy = true
@@ -32,5 +30,3 @@ export class ShootingEnemy extends Enemy
             return
         @shoottimer = @fire_rate
         World\add_entity Shot @pos, Vec2(-1, 0), 500, false, @radius + 5
-
-{ :ShootingEnemy }

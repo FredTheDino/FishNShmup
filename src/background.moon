@@ -1,7 +1,6 @@
-import Entity, World from require "world"
-
 export scroll_speed = 500
 
+--TODO particle system instead
 export class BGItem extends Entity
     new: (kind, depth) =>
         super!
@@ -24,5 +23,3 @@ export class BGItem extends Entity
         @pos = @pos\add Vec2(-scroll_speed, 0)\scale delta / @depth
         if @pos.x < -100
             @alive = false
-
-{ :BGItem }

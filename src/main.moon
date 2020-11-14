@@ -1,10 +1,12 @@
-import Assets from require "assets"
-import Vec2, overlap, overlap_v from require "util"
-import Player from require "player"
-import ShootingEnemy from require "enemy"
-import Entity, World from require "world"
-import GenericPickupItem from require "item"
-import BGItem from require "background"
+require "assets"
+require "util"
+
+require "world"
+require "shot"
+require "player"
+require "enemy"
+require "item"
+require "background"
 
 gfx = love.graphics
 

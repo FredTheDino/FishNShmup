@@ -1,5 +1,3 @@
-import overlap_v from require "util"
-
 keyboard = love.keyboard
 gfx = love.graphics
 
@@ -51,5 +49,3 @@ export class World
                 a\on_collision b
                 b\on_collision a
         @@\filter_alive!
-
-{ :Entity, :World }
