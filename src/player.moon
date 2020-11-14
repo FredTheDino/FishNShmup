@@ -10,8 +10,9 @@ export class Player extends Entity
         @speed = 256
         @shoottimer = 0
         @fire_rate = 0.2
-        @health = 3
+        @health = 10
         @img = Assets\get "ship.png"
+        @shield_img = Assets\get "shield.png"
 
         @engine_particles = gfx.newParticleSystem Assets\get "tmp_engine.png"
         @engine_particles\setParticleLifetime 1, 2
@@ -21,6 +22,9 @@ export class Player extends Entity
     draw: =>
         super\draw!
         gfx.draw @img, @pos.x + @draw_offset.x, @pos.y + @draw_offset.y, math.pi/2
+        gfx.setColor 255, 255, 255, (@health / 10) * 0.7
+        gfx.draw @shield_img, @pos.x + @draw_offset.x, @pos.y + @draw_offset.y, math.pi/2
+        gfx.setColor 255, 255, 255, 1
         gfx.draw @engine_particles
 
     fire: =>
@@ -32,7 +36,9 @@ export class Player extends Entity
     damage: (dmg) =>
         @health -= dmg
         if @health < 0
-            @alive = false
+            @health = 0
+            print("player died")
+            --@alive = false
 
     landed_hit: =>
         Combo\increase 10
