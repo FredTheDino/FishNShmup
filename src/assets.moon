@@ -22,6 +22,7 @@ export class Assets
         @load_img("dmg_part_4.png")
         @load_img("dmg_part_5.png")
         @load_img("ship.png")
+        @load_img("tmp_engine.png")
 
     @load_img: (name) =>
         @load_ass name, love.graphics.newImage name
