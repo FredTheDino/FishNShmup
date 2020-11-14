@@ -72,6 +72,12 @@ export class Player extends Entity
             
         @pos = @pos\add(dpos\scale(delta * @speed))
 
+        World\test_collision @
+
+    on_collision: (other) =>
+        if other.__class == Item
+            other\on_collision
+
 export class Enemy extends Entity
     new: (pos, vel) =>
         super!

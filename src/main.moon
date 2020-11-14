@@ -1,6 +1,7 @@
 import Vec2, overlap, overlap_v from require "util"
 import Player, Enemy from require "player"
 import Entity, World from require "world"
+import GenericPickupItem from require "item"
 
 gfx = love.graphics
 
@@ -17,6 +18,7 @@ class Circle
 love.load = (arg) ->
     World\add_entity Entity!
     World\add_entity Player!
+    World\add_entity GenericPickupItem!
 
 next_spawn = 0
 time_between_spawn = 4

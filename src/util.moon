@@ -34,4 +34,7 @@ overlap_v = (ca, ra, cb, rb) ->
     radi = (ra + rb) * (ra + rb)
     dist <= radi
 
-{ :Vec2, :overlap, :overlap_v }
+random_real = (lo, hi) ->
+    (hi - lo) * math.random() + lo
+
+{ :Vec2, :overlap, :overlap_v, :random_real }
