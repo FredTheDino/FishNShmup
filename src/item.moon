@@ -15,4 +15,8 @@ export class Item extends Entity
     update: (delta) =>
         @pos = @pos\add @dir\scale delta*100
 
+    on_collision: =>
+        @alive = false
+        print("item picked up")
+
 { :Item }

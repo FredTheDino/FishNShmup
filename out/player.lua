@@ -105,6 +105,16 @@ do
         self:fire()
       end
       self.pos = self.pos:add(dpos:scale(delta * self.speed))
+      return World:test_collision(self)
+    end,
+    on_collision = function(self, other)
+      if other.__class == Item then
+        local _base_1 = other
+        local _fn_0 = _base_1.on_collision
+        return function(...)
+          return _fn_0(_base_1, ...)
+        end
+      end
     end
   }
   _base_0.__index = _base_0

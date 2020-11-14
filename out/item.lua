@@ -12,6 +12,10 @@ do
     end,
     update = function(self, delta)
       self.pos = self.pos:add(self.dir:scale(delta * 100))
+    end,
+    on_collision = function(self)
+      self.alive = false
+      return print("item picked up")
     end
   }
   _base_0.__index = _base_0
