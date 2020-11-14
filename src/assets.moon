@@ -24,6 +24,9 @@ export class Assets
         @load_img("ship.png")
         @load_img("tmp_engine.png")
 
+        larger_font = love.graphics.newFont 20
+        love.graphics.setFont larger_font
+
     @load_img: (name) =>
         img = love.graphics.newImage name
         img\setFilter "nearest", "nearest"

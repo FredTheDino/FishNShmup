@@ -32,12 +32,12 @@ export class Combo
         gfx.setLineStyle "smooth"
         gfx.setLineWidth 5
         gfx.setColor 1.0, 1.0, 1.0, 0.5
-        gfx.arc "fill", x, y, radius, 0, math.pi * 2 * time_left, 20
+        gfx.circle "fill", x, y, radius * time_left, 20
         gfx.circle "fill", x, y, radius * 0.75, 20
         gfx.setLineWidth 1
 
         gfx.setColor 0.0, 0.0, 0.0
-        gfx.printf ""..@score, x, y, 100, "center"
-        gfx.printf "X"..@multiplier, x, y + 10, 100, "center"
-        gfx.printf "Combo"..@combo, x, y + 20, 100, "center"
+        gfx.printf ""..@score, x - 47.5, y - 10, 100, "center"
+        gfx.printf "X"..@multiplier, x - 47.5, y + 20, 100, "center"
+        --gfx.printf "Combo"..@combo, x, y + 20, 100, "center"
         gfx.setColor 1.0, 1.0, 1.0
