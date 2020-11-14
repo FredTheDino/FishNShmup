@@ -2,6 +2,7 @@ require "assets"
 require "util"
 
 require "world"
+require "entity"
 require "shot"
 require "player"
 require "enemy"
@@ -25,7 +26,6 @@ spawn_background = (delta) ->
 
 love.load = (arg) ->
     Assets\load!
-    World\add_entity Entity!
     World\add_entity Player!
     World\add_entity GenericPickupItem!
     gfx.setBackgroundColor 238 / 255, 223 / 255, 203 / 255
