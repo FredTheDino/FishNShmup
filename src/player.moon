@@ -19,11 +19,19 @@ export class Player extends Entity
         @engine_particles\setEmissionRate 5
         @engine_particles\start!
 
+        @shield = 1
+        @shield_on = true
+        @shield_recharge = 0.3 -- shield recharged per second
+        @shield_damage_strength = 0.1 -- how much shield to lose per dmg
+
     draw: =>
         super\draw!
         gfx.draw @img, @pos.x + @draw_offset.x, @pos.y + @draw_offset.y, math.pi/2
-        gfx.setColor 255, 255, 255, (@health / 10) * 0.7
+
+        --TODO draw bar
+        gfx.setColor 255, 255, 255, @shield * 0.7
         gfx.draw @shield_img, @pos.x + @draw_offset.x, @pos.y + @draw_offset.y, math.pi/2
+
         gfx.setColor 255, 255, 255, 1
         gfx.draw @engine_particles
 
@@ -34,11 +42,16 @@ export class Player extends Entity
         World\add_entity Shot @pos, Vec2(1, 0), 500, @, @radius + 5
 
     damage: (dmg) =>
-        @health -= dmg
-        if @health < 0
-            @health = 0
-            print("player died")
-            --@alive = false
+        if @shield_on
+            @shield -= dmg * @shield_damage_strength
+            if @shield < 0
+                @shield_on = false
+        else
+            @health -= dmg
+            if @health < 0
+                @health = 0
+                print("player died")
+                --@alive = false
 
     landed_hit: =>
         Combo\increase 10
@@ -58,7 +71,13 @@ export class Player extends Entity
         @shoottimer -= delta
         if keyboard.isDown "space"
             @fire!
-            
+
+        if @shield < 1
+            @shield += @shield_recharge * delta
+        if @shield > 1
+            @shield = 1
+            @shield_on = true
+
         @pos = @pos\add dpos\scale delta * @speed
         @engine_particles\setPosition @pos.x, @pos.y
 
