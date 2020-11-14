@@ -60,6 +60,9 @@ export class Fishing
         elseif @@score > 0
             @@score -= 2
 
+        if @@score > 500
+            World.gone_fishing = false
+
         print(@@score, @@current)
 
     @draw: =>
