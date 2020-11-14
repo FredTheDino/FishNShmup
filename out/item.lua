@@ -19,9 +19,9 @@ do
   _class_0 = setmetatable({
     __init = function(self)
       _class_0.__parent.__init(self)
-      self.pos = Vec2(600, 400)
+      self.pos = Vec2(600, 300)
       math.randomseed(os.time())
-      self.dir = (Vec2(random_real(-1, 1), random_real(-1, 1))):normalized()
+      self.dir = (Vec2(random_real(-1, -0.5), random_real(-1, 1))):normalized()
     end,
     __base = _base_0,
     __name = "Item",
