@@ -1,3 +1,5 @@
+gfx = love.graphics
+
 export class Shot extends Entity
     new: (pos, dir, vel, friendly, offset = 0) =>
         super!
@@ -8,7 +10,7 @@ export class Shot extends Entity
         @friendly = friendly
         --@acc = 0
 
-    draw: (gfx) =>
+    draw: =>
         gfx.setColor 0, 0, 255
         gfx.circle "fill", @pos.x, @pos.y, @radius, 20
 

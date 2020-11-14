@@ -10,24 +10,21 @@ export class Entity
         @radius = 32
         @alive = true
 
-    draw: (gfx) =>
+    draw: =>
         gfx.setColor 0, 255, 0
-        gfx.circle "fill", @pos.x, @pos.y, 20, 20
+        gfx.circle "line", @pos.x, @pos.y, @radius, 20
 
     update: (delta) =>
-        if keyboard.isDown "f"
-            print("F")
-            @alive = false
 
     on_collision: (other) =>
 
 export class World
     @entities = {}
 
-    @draw: (gfx) =>
+    @draw: =>
         for e in *@@entities
             if e.alive
-                e\draw gfx
+                e\draw!
 
     @update: (delta) =>
         for e in *@@entities

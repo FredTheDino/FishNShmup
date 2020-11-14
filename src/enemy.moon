@@ -1,3 +1,5 @@
+gfx = love.graphics
+
 class Enemy extends Entity
     new: (pos, vel) =>
         super!
@@ -15,7 +17,7 @@ class Enemy extends Entity
         if @health < 0
             @alive = false
 
-    draw: (gfx) =>
+    draw: =>
         gfx.setColor 255, 0, 255
         gfx.circle "fill", @pos.x, @pos.y, @radius, 20
 

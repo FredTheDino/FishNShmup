@@ -42,6 +42,6 @@ love.update = (dt) ->
     World\update dt
 
 
-love.draw = () ->
+love.draw = ->
     t = love.timer.getTime!
-    World\draw gfx
+    World\draw!

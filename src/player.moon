@@ -19,6 +19,7 @@ export class Player extends Entity
         @engine_particles\start!
 
     draw: =>
+        super\draw!
         gfx.setColor 255, 0, 0
         gfx.circle "fill", @pos.x, @pos.y, @radius, 20
         gfx.setColor 255, 255, 255
@@ -56,7 +57,3 @@ export class Player extends Entity
         @engine_particles\setPosition @pos.x, @pos.y
 
         World\test_collision @
-
-    on_collision: (other) =>
-        if other.__class == Item
-            other\on_collision

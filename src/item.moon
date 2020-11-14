@@ -1,11 +1,14 @@
+gfx = love.graphics
+
 class Item extends Entity
     new: =>
         super!
+        @item = true
         @pos = Vec2 600, 300
         math.randomseed(os.time())
         @dir = (Vec2 random_real(-1, -0.5), random_real(-1, 1))\normalized!
 
-    draw: (gfx) =>
+    draw: =>
         gfx.setColor 0, 255, 255
         gfx.circle "fill", @pos.x, @pos.y, 10, 20
 

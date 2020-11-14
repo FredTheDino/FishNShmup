@@ -1,5 +1,7 @@
 export scroll_speed = 500
 
+gfx = love.graphics
+
 --TODO particle system instead
 export class BGItem extends Entity
     new: (kind, depth) =>
@@ -14,7 +16,7 @@ export class BGItem extends Entity
         if kind == "bg_cloud"
             @img = Assets\get kind .. "_" .. math.random(1, 4) .. ".png"
 
-    draw: (gfx) =>
+    draw: =>
         gfx.setColor 255, 255, 255
         gfx.draw @img, @pos.x, @pos.y, 0
         --gfx.circle "fill", @pos.x, @pos.y, 10, 20
