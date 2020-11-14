@@ -12,6 +12,8 @@ require "background"
 
 gfx = love.graphics
 
+total_t = 0
+
 bg_timer = 0.0
 bg_timer_lo = 0.2
 bg_timer_hi = 5.0
@@ -35,13 +37,14 @@ love.load = (arg) ->
 next_spawn = 0
 time_between_spawn = 4
 love.update = (dt) ->
+    total_t += dt
     next_spawn -= dt
     if next_spawn < 0
         next_spawn = time_between_spawn
         World\add_entity ShootingEnemy Vec2(love.graphics.getWidth!, 100), Vec2(-100, math.random(-100, 100))
     spawn_background dt
         
-    World\update dt
+    World\update dt, total_t
     Combo\update dt
 
 
