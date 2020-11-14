@@ -15,8 +15,7 @@ require "fishing"
 gfx = love.graphics
 keyboard = love.keyboard
 
-gone_fishing = false
-prev_f = false
+prev_f = false --TODO framework?
 
 love.load = (arg) ->
     Assets\load!
@@ -41,12 +40,12 @@ love.load = (arg) ->
 next_spawn = 0
 time_between_spawn = 4
 love.update = (dt) ->
-    if keyboard.isDown("f") and not prev_f
+    if not prev_f and keyboard.isDown "f"
         prev_f = true
-        gone_fishing = not gone_fishing
+        World.gone_fishing = not World.gone_fishing
     if prev_f and not keyboard.isDown "f"
         prev_f = false
-    if gone_fishing
+    if World.gone_fishing
         Fishing\update dt
     else
         next_spawn -= dt
@@ -60,7 +59,7 @@ love.update = (dt) ->
 
 love.draw = ->
     t = love.timer.getTime!
-    if gone_fishing
+    if World.gone_fishing
         Fishing\draw!
     else
         Background\draw!
