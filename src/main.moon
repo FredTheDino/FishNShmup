@@ -8,16 +8,6 @@ import BGItem from require "background"
 
 gfx = love.graphics
 
-class Circle
-    new: (x, y, r) =>
-        @pos = Vec2(x, y)
-        @r = r
-
-    draw: (r, g, b) =>
-        gfx.setColor r, g, b
-        gfx.circle "fill", @pos.x, @pos.y, @r, 20
-
-
 bg_timer = 0.0
 bg_timer_lo = 0.2
 bg_timer_hi = 5.0
@@ -51,6 +41,4 @@ love.update = (dt) ->
 
 love.draw = () ->
     t = love.timer.getTime!
-    a = Circle 100, 100, math.sin(t) * 30
-    b = Circle 120, 100, math.sin(t) * 30
     World\draw gfx
