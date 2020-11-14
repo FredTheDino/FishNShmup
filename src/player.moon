@@ -5,12 +5,13 @@ keyboard = love.keyboard
 gfx = love.graphics
 
 export class Shot extends Entity
-    new: (pos, dir, vel, offset = 0) =>
+    new: (pos, dir, vel, friendly, offset = 0) =>
         super!
         @radius = 10
         @lifetime = 200
         @pos = pos\add dir\scale offset + @radius
         @vel = dir\normalized!\scale(vel)
+        @friendly = friendly
         --@acc = 0
 
     draw: (gfx) =>
@@ -25,7 +26,7 @@ export class Shot extends Entity
             @alive = false
 
     on_collision: (other) =>
-        if other.player or other.enemy
+        if (other.player and not @friendly) or (other.enemy and @friendly)
             @alive = false
             other\damage(1)
 
@@ -57,7 +58,7 @@ export class Player extends Entity
         if @shoottimer > 0
             return
         @shoottimer = @fire_rate
-        World\add_entity Shot @pos, Vec2(1, 0), 500, @radius + 5
+        World\add_entity Shot @pos, Vec2(1, 0), 500, true, @radius + 5
 
     damage: (dmg) =>
         @health -= dmg
