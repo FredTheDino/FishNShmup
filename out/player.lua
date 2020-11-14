@@ -26,11 +26,8 @@ do
     end,
     on_collision = function(self, other)
       self.alive = false
-      if other.__class == Player then
-        other.alive = false
-      end
-      if other.__class == Enemy then
-        other.alive = false
+      if other.__class == Player or other.__class == Enemy then
+        return other:damage(1)
       end
     end
   }
@@ -89,6 +86,12 @@ do
       self.shoottimer = self.fire_rate
       return World:add_entity(Shot(self.pos, Vec2(1, 0), 500, self.radius + 5))
     end,
+    damage = function(self, dmg)
+      self.health = self.health - dmg
+      if self.health < 0 then
+        self.alive = false
+      end
+    end,
     update = function(self, delta)
       local dpos = Vec2()
       if keyboard.isDown("a") then
@@ -119,6 +122,7 @@ do
       self.speed = 256
       self.shoottimer = 0
       self.fire_rate = 0.2
+      self.health = 3
     end,
     __base = _base_0,
     __name = "Player",
@@ -158,6 +162,12 @@ do
       self.shoottimer = self.fire_rate
       return World:add_entity(Shot(self.pos, Vec2(-1, 0), 500, self.radius + 5))
     end,
+    damage = function(self, dmg)
+      self.health = self.health - dmg
+      if self.health < 0 then
+        self.alive = false
+      end
+    end,
     draw = function(self, gfx)
       gfx.setColor(255, 0, 255)
       return gfx.circle("fill", self.pos.x, self.pos.y, self.radius, 20)
@@ -177,6 +187,7 @@ do
       self.vel = vel
       self.fire_rate = 0.2
       self.shoottimer = 0
+      self.health = 3
     end,
     __base = _base_0,
     __name = "Enemy",

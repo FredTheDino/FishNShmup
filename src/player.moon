@@ -28,10 +28,8 @@ export class Shot extends Entity
 
     on_collision: (other) =>
         @alive = false
-        if other.__class == Player
-            other.alive = false
-        if other.__class == Enemy
-            other.alive = false
+        if other.__class == Player or other.__class == Enemy
+            other\damage(1)
 
 export class Player extends Entity
     new: =>
@@ -40,6 +38,7 @@ export class Player extends Entity
         @speed = 256
         @shoottimer = 0
         @fire_rate = 0.2
+        @health = 3
 
     draw: (gfx) =>
         gfx.setColor 255, 0, 0
@@ -50,6 +49,11 @@ export class Player extends Entity
             return
         @shoottimer = @fire_rate
         World\add_entity Shot @pos, Vec2(1, 0), 500, @radius + 5
+
+    damage: (dmg) =>
+        @health -= dmg
+        if @health < 0
+            @alive = false
 
     update: (delta) =>
         dpos = Vec2!
@@ -75,12 +79,18 @@ export class Enemy extends Entity
         @vel = vel
         @fire_rate = 0.2
         @shoottimer = 0
+        @health = 3
 
     fire: () =>
         if @shoottimer > 0
             return
         @shoottimer = @fire_rate
         World\add_entity Shot @pos, Vec2(-1, 0), 500, @radius + 5
+
+    damage: (dmg) =>
+        @health -= dmg
+        if @health < 0
+            @alive = false
 
     draw: (gfx) =>
         gfx.setColor 255, 0, 255
