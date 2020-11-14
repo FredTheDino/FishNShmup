@@ -83,6 +83,9 @@ do
       return gfx.circle("fill", self.pos.x, self.pos.y, self.radius, 20)
     end,
     fire = function(self)
+      if self.shoottimer > 0 then
+        return 
+      end
       self.shoottimer = self.fire_rate
       return World:add_entity(Shot(self.pos, Vec2(1, 0), 500, self.radius + 5))
     end,
@@ -101,7 +104,7 @@ do
         dpos.x = dpos.x + 1
       end
       self.shoottimer = self.shoottimer - delta
-      if self.shoottimer < 0 and keyboard.isDown("space") then
+      if keyboard.isDown("space") then
         self:fire()
       end
       self.pos = self.pos:add(dpos:scale(delta * self.speed))
@@ -148,12 +151,21 @@ do
   local _class_0
   local _parent_0 = Entity
   local _base_0 = {
+    fire = function(self)
+      if self.shoottimer > 0 then
+        return 
+      end
+      self.shoottimer = self.fire_rate
+      return World:add_entity(Shot(self.pos, Vec2(-1, 0), 500, self.radius + 5))
+    end,
     draw = function(self, gfx)
       gfx.setColor(255, 0, 255)
       return gfx.circle("fill", self.pos.x, self.pos.y, self.radius, 20)
     end,
     update = function(self, delta)
       self.pos = self.pos:add(self.vel:scale(delta))
+      self.shoottimer = self.shoottimer - delta
+      return self:fire()
     end
   }
   _base_0.__index = _base_0
@@ -163,6 +175,8 @@ do
       _class_0.__parent.__init(self)
       self.pos = pos
       self.vel = vel
+      self.fire_rate = 0.2
+      self.shoottimer = 0
     end,
     __base = _base_0,
     __name = "Enemy",

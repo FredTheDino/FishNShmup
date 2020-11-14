@@ -46,6 +46,8 @@ export class Player extends Entity
         gfx.circle "fill", @pos.x, @pos.y, @radius, 20
 
     fire: () =>
+        if @shoottimer > 0
+            return
         @shoottimer = @fire_rate
         World\add_entity Shot @pos, Vec2(1, 0), 500, @radius + 5
 
@@ -61,7 +63,7 @@ export class Player extends Entity
             dpos.x += 1
 
         @shoottimer -= delta
-        if  @shoottimer < 0 and keyboard.isDown "space"
+        if  keyboard.isDown "space"
             @fire!
             
         @pos = @pos\add(dpos\scale(delta * @speed))
@@ -71,6 +73,14 @@ export class Enemy extends Entity
         super!
         @pos = pos
         @vel = vel
+        @fire_rate = 0.2
+        @shoottimer = 0
+
+    fire: () =>
+        if @shoottimer > 0
+            return
+        @shoottimer = @fire_rate
+        World\add_entity Shot @pos, Vec2(-1, 0), 500, @radius + 5
 
     draw: (gfx) =>
         gfx.setColor 255, 0, 255
@@ -78,5 +88,7 @@ export class Enemy extends Entity
 
     update: (delta) =>
         @pos = @pos\add @vel\scale delta
+        @shoottimer -= delta
+        @fire!
 
 { :Player, :Enemy }
