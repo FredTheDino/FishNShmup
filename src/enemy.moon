@@ -23,6 +23,17 @@ class Enemy extends Entity
         @shoottimer -= delta
         @fire!
 
+        if @pos.x < -@radius
+            alive = false
+
+        if @pos.y < -@radius
+            alive = false
+
+        if @pos.y - @radius > gfx.getHeight!
+            alive = false
+
+        World\test_collision @
+
 export class ShootingEnemy extends Enemy
     fire: =>
         if @shoottimer > 0
