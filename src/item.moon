@@ -16,7 +16,10 @@ export class Item extends Entity
         @pos = @pos\add @dir\scale delta*100
 
     on_collision: =>
+
+export class GenericPickupItem extends Item
+    on_collision: =>
         @alive = false
         print("item picked up")
 
-{ :Item }
+{ :Item, :GenericPickupItem }
