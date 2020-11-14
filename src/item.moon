@@ -8,7 +8,7 @@ class Item extends Entity
         @pos = Vec2 600, 300
         math.randomseed(os.time())
         @dir = (Vec2 random_real(-1, -0.5), random_real(-1, 1))\normalized!
-        @color = { 0, 255, 255 }
+        @color = { 0, 1.0, 1.0 }
 
     update: (delta) =>
         @pos = @pos\add @dir\scale delta*100

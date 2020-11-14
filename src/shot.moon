@@ -8,7 +8,7 @@ export class Shot extends Entity
         @pos = pos\add dir\scale offset + @radius
         @vel = dir\normalized!\scale(vel)
         @owner = owner
-        @color = { 0, 0, 255 }
+        @color = { 0, 0, 1.0 }
 
     update: (delta) =>
         @pos = @pos\add @vel\scale delta

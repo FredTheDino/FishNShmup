@@ -17,7 +17,7 @@ export class BGItem extends Entity
             @img = Assets\get kind .. "_" .. math.random(1, 4) .. ".png"
 
     draw: =>
-        gfx.setColor 255, 255, 255
+        gfx.setColor 1.0, 1.0, 1.0
         gfx.draw @img, @pos.x, @pos.y, 0
         --gfx.circle "fill", @pos.x, @pos.y, 10, 20
 

@@ -9,7 +9,7 @@ class Enemy extends Entity
         @fire_rate = 0.2
         @shoottimer = 0
         @health = 3
-        @color = { 255, 0, 255 }
+        @color = { 1.0, 0.0, 1.0 }
 
     fire: =>
 
