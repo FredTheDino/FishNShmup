@@ -8,23 +8,42 @@ export class Fishing
     @cursor_speed = 0.5
     @total_t = 0
 
-    @bar_width = 0.075
+    @difficulties = {
+        { 0.1, 0.6 },
+        { 0.075, 1.0 }
+    }
+
+    @bar_width = @difficulties[1][1]
     @bar_start = 0.5 - @bar_width
     @bar_end = 0.5 + @bar_width
+
+    @sin_speed = @difficulties[1][2]
 
     @top_x = 250
     @top_y = 250
     @box_w = 250
     @box_h = 40
 
-    @new_game: =>
+    @new_game: (difficulty = 1) =>
         @@current = 0.5
         @@total_t = 0
         @@score = 0
 
+        @@bar_width = @@difficulties[difficulty][1]
+        @@sin_speed = @@difficulties[difficulty][2]
+
+        @@bar_start = 0.5 - @@bar_width
+        @@bar_end = 0.5 + @@bar_width
+
+
     @update: (delta) =>
+        if keyboard.isDown "1"
+            @@new_game 1
+        if keyboard.isDown "2"
+            @@new_game 2
+
         @total_t += delta
-        @@current += math.sin(3*@total_t) * random_real(delta / 2, delta)
+        @@current += math.sin(3*@total_t) * random_real(delta / 2, delta) * @@sin_speed
 
         if keyboard.isDown "a"
             @@current -= @@cursor_speed * delta
