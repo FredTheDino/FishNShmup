@@ -21,16 +21,18 @@ export class Player extends Entity
 
         @shield = 1
         @shield_on = true
-        @shield_recharge = 0.3 -- shield recharged per second
-        @shield_damage_strength = 0.1 -- how much shield to lose per dmg
+        @shield_flashing_cur_status = false
+        @shield_recharge = 0.2 -- shield recharged per second
+        @shield_damage_strength = 0.2 -- how much shield to lose per dmg
 
     draw: =>
         super\draw!
         gfx.draw @img, @pos.x + @draw_offset.x, @pos.y + @draw_offset.y, math.pi/2
 
         --TODO draw bar
-        gfx.setColor 255, 255, 255, @shield * 0.7
-        gfx.draw @shield_img, @pos.x + @draw_offset.x, @pos.y + @draw_offset.y, math.pi/2
+        if @shield_on or @shield_flashing_cur_status
+            gfx.setColor 255, 255, 255, @shield * 0.7
+            gfx.draw @shield_img, @pos.x + @draw_offset.x, @pos.y + @draw_offset.y, math.pi/2
 
         gfx.setColor 255, 255, 255, 1
         gfx.draw @engine_particles
@@ -56,7 +58,7 @@ export class Player extends Entity
     landed_hit: =>
         Combo\increase 10
 
-    update: (delta) =>
+    update: (delta, total_time) =>
         @engine_particles\update delta
         dpos = Vec2!
         if keyboard.isDown "a"
@@ -76,7 +78,10 @@ export class Player extends Entity
             @shield += @shield_recharge * delta
         if @shield > 1
             @shield = 1
+        if not @shield_on and @shield > 0.66
             @shield_on = true
+        if not @shield_on
+            @shield_flashing_cur_status = (math.floor(total_time * 5)) % 2 == 0
 
         @pos = @pos\add dpos\scale delta * @speed
         @engine_particles\setPosition @pos.x, @pos.y
