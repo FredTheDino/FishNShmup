@@ -53,7 +53,7 @@ export class Player extends Entity
         if keyboard.isDown "space"
             @fire!
             
-        @pos = @pos\add(dpos\scale(delta * @speed))
+        @pos = @pos\add dpos\scale delta * @speed
         @engine_particles\setPosition @pos.x, @pos.y
 
         World\test_collision @
