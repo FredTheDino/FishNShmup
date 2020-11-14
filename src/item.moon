@@ -1,7 +1,18 @@
 import Entity from require "world"
+import random_real from require "util"
 
 export class Item extends Entity
     new: =>
         super!
+        @pos = Vec2 600, 400
+        math.randomseed(os.time())
+        @dir = (Vec2 random_real(-1, 1), random_real(-1, 1))\normalized!
+
+    draw: (gfx) =>
+        gfx.setColor 0, 255, 255
+        gfx.circle "fill", @pos.x, @pos.y, 10, 20
+
+    update: (delta) =>
+        @pos = @pos\add @dir\scale delta*100
 
 { :Item }

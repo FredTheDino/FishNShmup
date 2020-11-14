@@ -56,8 +56,12 @@ overlap_v = function(ca, ra, cb, rb)
   local radi = (ra + rb) * (ra + rb)
   return dist <= radi
 end
+random_real = function(lo, hi)
+  return (hi - lo) * math.random() + lo
+end
 return {
   Vec2 = Vec2,
   overlap = overlap,
-  overlap_v = overlap_v
+  overlap_v = overlap_v,
+  random_real = random_real
 }

@@ -1,14 +1,27 @@
 local Entity
 Entity = require("world").Entity
+local random_real
+random_real = require("util").random_real
 do
   local _class_0
   local _parent_0 = Entity
-  local _base_0 = { }
+  local _base_0 = {
+    draw = function(self, gfx)
+      gfx.setColor(0, 255, 255)
+      return gfx.circle("fill", self.pos.x, self.pos.y, 10, 20)
+    end,
+    update = function(self, delta)
+      self.pos = self.pos:add(self.dir:scale(delta * 100))
+    end
+  }
   _base_0.__index = _base_0
   setmetatable(_base_0, _parent_0.__base)
   _class_0 = setmetatable({
     __init = function(self)
-      return _class_0.__parent.__init(self)
+      _class_0.__parent.__init(self)
+      self.pos = Vec2(600, 400)
+      math.randomseed(os.time())
+      self.dir = (Vec2(random_real(-1, 1), random_real(-1, 1))):normalized()
     end,
     __base = _base_0,
     __name = "Item",

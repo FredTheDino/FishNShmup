@@ -13,6 +13,8 @@ do
   local _obj_0 = require("world")
   Entity, World = _obj_0.Entity, _obj_0.World
 end
+local Item
+Item = require("item").Item
 local gfx = love.graphics
 local Circle
 do
@@ -44,7 +46,8 @@ do
 end
 love.load = function(arg)
   World:add_entity(Entity())
-  return World:add_entity(Player())
+  World:add_entity(Player())
+  return World:add_entity(Item())
 end
 local next_spawn = 0
 local time_between_spawn = 4
