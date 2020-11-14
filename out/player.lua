@@ -80,9 +80,11 @@ do
   local _base_0 = {
     draw = function(self, gfx)
       gfx.setColor(255, 0, 0)
-      return gfx.circle("fill", self.pos.x, self.pos.y, self.radius, 20)
+      gfx.circle("fill", self.pos.x, self.pos.y, self.radius, 20)
+      gfx.setColor(255, 255, 255)
+      return gfx.draw(self.img, self.pos.x + self.draw_offset.x, self.pos.y + self.draw_offset.y, math.pi / 2)
     end,
-    fire = function(self)
+    fire = function(self, line)
       self.shoottimer = self.fire_rate
       return World:add_entity(Shot(self.pos, Vec2(1, 0), 500, self.radius + 5))
     end,
@@ -113,9 +115,11 @@ do
     __init = function(self)
       _class_0.__parent.__init(self)
       self.pos = Vec2()
+      self.draw_offset = Vec2(48, -40)
       self.speed = 256
       self.shoottimer = 0
       self.fire_rate = 0.2
+      self.img = love.graphics.newImage("ship.png")
     end,
     __base = _base_0,
     __name = "Player",

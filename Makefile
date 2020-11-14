@@ -1,13 +1,15 @@
-OUTDIR=out/
+OUT=out/
+RES=res/
 
 build:
-	rm -rf $(OUTDIR)/*
-	mkdir -p $(OUTDIR)
-	moonc -t $(OUTDIR) src/*.moon 
-	mv $(OUTDIR)/src/* $(OUTDIR)/
+	rm -rf $(OUT)/*
+	mkdir -p $(OUT)
+	moonc -t $(OUT) src/*.moon 
+	mv $(OUT)/src/* $(OUT)/
+	cp $(RES)/* $(OUT)/
 
 run: build
-	love $(OUTDIR)
+	love $(OUT)
 
 clean:
-	rm -rf $(OUTDIR)/*
+	rm -rf $(OUT)/*
