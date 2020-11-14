@@ -13,7 +13,9 @@ require "background"
 require "fishing"
 
 gfx = love.graphics
-gone_fishing = true
+keyboard = love.keyboard
+
+gone_fishing = false
 
 bg_timer = 0.0
 bg_timer_lo = 0.2
@@ -38,6 +40,8 @@ love.load = (arg) ->
 next_spawn = 0
 time_between_spawn = 4
 love.update = (dt) ->
+    if keyboard.isDown "f"
+        gone_fishing = not gone_fishing
     if gone_fishing
         Fishing\update dt
     else

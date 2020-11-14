@@ -8,7 +8,7 @@ export class Fishing
     @cursor_speed = 0.5
     @total_t = 0
 
-    @bar_width = 0.05
+    @bar_width = 0.075
     @bar_start = 0.5 - @bar_width
     @bar_end = 0.5 + @bar_width
 
