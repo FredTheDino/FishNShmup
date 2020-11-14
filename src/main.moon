@@ -10,7 +10,12 @@ require "enemy"
 require "item"
 require "background"
 
+require "fishing"
+
 gfx = love.graphics
+keyboard = love.keyboard
+
+prev_f = false --TODO framework?
 
 love.load = (arg) ->
     Assets\load!
@@ -35,18 +40,28 @@ love.load = (arg) ->
 next_spawn = 0
 time_between_spawn = 4
 love.update = (dt) ->
-    next_spawn -= dt
-    if next_spawn < 0
-        next_spawn = time_between_spawn
-        World\add_entity ShootingEnemy Vec2(love.graphics.getWidth!, 100),
-                                       Vec2(-100, math.random(-100, 100))
+    if not prev_f and keyboard.isDown "f"
+        prev_f = true
+        World.gone_fishing = not World.gone_fishing
+    if prev_f and not keyboard.isDown "f"
+        prev_f = false
+    if World.gone_fishing
+        Fishing\update dt
+    else
+        next_spawn -= dt
+        if next_spawn < 0
+            next_spawn = time_between_spawn
+            World\add_entity ShootingEnemy Vec2(love.graphics.getWidth!, 100), Vec2(-100, math.random(-100, 100))
 
-    Background\update dt
-    World\update dt
-    Combo\update dt
+        Background\update dt
+        World\update dt
+        Combo\update dt
 
 love.draw = ->
     t = love.timer.getTime!
-    Background\draw!
-    World\draw!
-    Combo\draw!
+    if World.gone_fishing
+        Fishing\draw!
+    else
+        Background\draw!
+        World\draw!
+        Combo\draw!
