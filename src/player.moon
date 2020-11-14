@@ -35,16 +35,20 @@ export class Player extends Entity
     new: =>
         super!
         @pos = Vec2!
+        @draw_offset = Vec2(48, -40)
         @speed = 256
         @shoottimer = 0
         @fire_rate = 0.2
         @health = 3
+        @img = love.graphics.newImage("ship.png")
 
     draw: (gfx) =>
         gfx.setColor 255, 0, 0
         gfx.circle "fill", @pos.x, @pos.y, @radius, 20
+        gfx.setColor 255, 255, 255
+        gfx.draw @img, @pos.x + @draw_offset.x, @pos.y + @draw_offset.y, math.pi/2
 
-    fire: () =>
+    fire: =>
         if @shoottimer > 0
             return
         @shoottimer = @fire_rate
