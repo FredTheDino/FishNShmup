@@ -1,5 +1,5 @@
 import Vec2, overlap, overlap_v from require "util"
-import Player from require "player"
+import Player, Enemy from require "player"
 import Entity, World from require "world"
 
 gfx = love.graphics
@@ -18,7 +18,14 @@ love.load = (arg) ->
     World\add_entity Entity!
     World\add_entity Player!
 
+next_spawn = 0
+time_between_spawn = 4
 love.update = (dt) ->
+    next_spawn -= dt
+    if next_spawn < 0
+        next_spawn = time_between_spawn
+        World\add_entity Enemy Vec2(love.graphics.getWidth!, 100), Vec2(-100, math.random(-100, 100))
+
     World\update dt
 
 
