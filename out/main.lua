@@ -3,11 +3,10 @@ do
   local _obj_0 = require("util")
   Vec2, overlap, overlap_v = _obj_0.Vec2, _obj_0.overlap, _obj_0.overlap_v
 end
-local Player, Enemy
-do
-  local _obj_0 = require("player")
-  Player, Enemy = _obj_0.Player, _obj_0.Enemy
-end
+local Player
+Player = require("player").Player
+local ShootingEnemy
+ShootingEnemy = require("enemy").ShootingEnemy
 local Entity, World
 do
   local _obj_0 = require("world")
@@ -55,7 +54,7 @@ love.update = function(dt)
   next_spawn = next_spawn - dt
   if next_spawn < 0 then
     next_spawn = time_between_spawn
-    World:add_entity(Enemy(Vec2(love.graphics.getWidth(), 100), Vec2(-100, math.random(-100, 100))))
+    World:add_entity(ShootingEnemy(Vec2(love.graphics.getWidth(), 100), Vec2(-100, math.random(-100, 100))))
   end
   return World:update(dt)
 end

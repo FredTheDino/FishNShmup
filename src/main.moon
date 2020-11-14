@@ -1,5 +1,6 @@
 import Vec2, overlap, overlap_v from require "util"
-import Player, Enemy from require "player"
+import Player from require "player"
+import ShootingEnemy from require "enemy"
 import Entity, World from require "world"
 import GenericPickupItem from require "item"
 
@@ -26,7 +27,7 @@ love.update = (dt) ->
     next_spawn -= dt
     if next_spawn < 0
         next_spawn = time_between_spawn
-        World\add_entity Enemy Vec2(love.graphics.getWidth!, 100), Vec2(-100, math.random(-100, 100))
+        World\add_entity ShootingEnemy Vec2(love.graphics.getWidth!, 100), Vec2(-100, math.random(-100, 100))
 
     World\update dt
 

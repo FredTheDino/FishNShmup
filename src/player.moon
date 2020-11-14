@@ -2,7 +2,6 @@ import Vec2 from require "util"
 import Entity, World from require "world"
 
 local Player
-local Enemy
 
 keyboard = love.keyboard
 
@@ -82,33 +81,4 @@ export class Player extends Entity
         if other.__class == Item
             other\on_collision
 
-export class Enemy extends Entity
-    new: (pos, vel) =>
-        super!
-        @pos = pos
-        @vel = vel
-        @fire_rate = 0.2
-        @shoottimer = 0
-        @health = 3
-
-    fire: () =>
-        if @shoottimer > 0
-            return
-        @shoottimer = @fire_rate
-        World\add_entity Shot @pos, Vec2(-1, 0), 500, @radius + 5
-
-    damage: (dmg) =>
-        @health -= dmg
-        if @health < 0
-            @alive = false
-
-    draw: (gfx) =>
-        gfx.setColor 255, 0, 255
-        gfx.circle "fill", @pos.x, @pos.y, @radius, 20
-
-    update: (delta) =>
-        @pos = @pos\add @vel\scale delta
-        @shoottimer -= delta
-        @fire!
-
-{ :Player, :Enemy }
+{ :Player, :Shot }
