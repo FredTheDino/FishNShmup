@@ -21,9 +21,9 @@ export class Fishing
 
     @sin_speed = @difficulties[1][2]
 
-    @box = Vec2 250, 100
     @box_w = 250
     @box_h = 32
+    @box = Vec2((gfx.getWidth! - @box_w) / 2, gfx.getHeight! / 4)
 
     -- call @load
     @ship_img = nil
@@ -71,7 +71,7 @@ export class Fishing
         if keyboard.isDown "2"
             @@new_game 2
 
-        @total_t += delta
+        @@total_t += delta
         @@current += math.sin(3*@total_t) * random_real(delta / 2, delta) * @@sin_speed
         @@water_t = (@@water_t + 2 * delta) % 1
 
@@ -128,10 +128,10 @@ export class Fishing
     @draw: =>
         gfx.setColor 1.0, 1.0, 1.0, 1.0
 
+        -- water background
         w = @@water_tile\getWidth!
         h = @@water_tile\getHeight!
         scale = 2
-        -- water background
         for y = 0, 3
             for x = 0, 5
                 gfx.draw @@water_tile, w*x*scale - w*@@water_t*scale, h*y*scale, 0, scale, scale
