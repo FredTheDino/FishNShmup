@@ -9,7 +9,7 @@ class HitEffect extends Entity
                              1.0, 1.0, 1.0, 0.2,
                              0.0, 0.0, 1.0, 0.0
 
-        @particles\setSizes 4.0, 4.5, 2.5, 2.0
+        @particles\setSizes 4.0, 4.5
         @particles\setDirection 0
         @particles\setSpeed 0, 50
         @particles\setParticleLifetime 0.6, 0.8
@@ -67,7 +67,7 @@ export class Shot extends Entity
             @alive = false
             other\damage(1)
             if other.player
-                World\add_entity HitEffect @pos.x, @pos.y, "laser_1_part_1", 100
+                World\add_entity HitEffect @pos.x, @pos.y, "laser_1_part_1", 20
             else
                 World\add_entity HitEffect @pos.x, @pos.y, "dmg_part_2", 5
-                World\add_entity HitEffect @pos.x, @pos.y, "dmg_part_1", 20
+                World\add_entity HitEffect @pos.x, @pos.y, "dmg_part_1", 10
