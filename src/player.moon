@@ -75,7 +75,7 @@ export class Player extends Entity
         if @shield_on or @shield_flashing_cur_status
             gfx.setColor 1, 1, 1, 0.2 + @shield * 0.5
             gfx.draw @shield_img, @pos.x + @draw_offset.x - 2, @pos.y + @draw_offset.y - 3, math.pi/2
-            gfx.setColor 0.5, 0.5, 1, 1
+            gfx.setColor 109 / 255, 83 / 255, 120 / 255, 1.0
             gfx.rectangle "fill", @pos.x - 40, @pos.y + @draw_offset.y - 20, 80 * @shield, 10
         gfx.setColor 0, 0, 0
         gfx.rectangle "line", @pos.x - 40, @pos.y + @draw_offset.y - 20, 80, 10
