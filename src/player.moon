@@ -6,7 +6,7 @@ export class Player extends Entity
     new: =>
         super!
         @player = true
-        @pos = Vec2!
+        @pos = Vec2(gfx.getWidth!, gfx.getHeight!)\div 2
         @draw_offset = Vec2(48, -40)
         @speed = 256
         @shoottimer = 0
@@ -17,10 +17,26 @@ export class Player extends Entity
         @shot_sfx = audio.newSource Assets\get "laser_sound.wav"
         @die_sfx = audio.newSource Assets\get "explosion_dead.wav"
 
-        @engine_particles = gfx.newParticleSystem Assets\get "tmp_engine"
-        @engine_particles\setParticleLifetime 1, 2
-        @engine_particles\setEmissionRate 5
+        @engine_particles = gfx.newParticleSystem Assets\get "laser_2_part_1"
+        @engine_particles\setColors 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.75, 1.0, 1.0, 1.0, 0.0
+        @engine_particles\setSizes 4.0, 4.5, 2.5, 2.0
+        @engine_particles\setSpread 0.3
+        @engine_particles\setDirection math.pi
+        @engine_particles\setSpeed 300, 400
+        @engine_particles\setParticleLifetime 0.3, 0.5
+        @engine_particles\setEmissionRate 35
         @engine_particles\start!
+
+        @engine_particles_smoke = gfx.newParticleSystem Assets\get "laser_2_part_1"
+
+        @engine_particles_smoke\setSizes 4.0, 4.5, 8.5, 9.0
+        @engine_particles_smoke\setColors 0.0, 0.0, 0.0, 0.5, 0.0, 0.0, 0.0, 0.45, 0.0, 0.0, 0.0, 0.0
+        @engine_particles_smoke\setSpread 1
+        @engine_particles_smoke\setDirection math.pi
+        @engine_particles_smoke\setSpeed 100, 300
+        @engine_particles_smoke\setParticleLifetime 0.6, 0.8
+        @engine_particles_smoke\setEmissionRate 10
+        @engine_particles_smoke\start!
 
         @shield = 1
         @shield_on = true
@@ -45,6 +61,7 @@ export class Player extends Entity
         gfx.rectangle "line", @pos.x - 40, @pos.y + @draw_offset.y - 20, 80, 10
 
         gfx.setColor 1.0, 1.0, 1.0
+        gfx.draw @engine_particles_smoke
         gfx.draw @engine_particles
 
     on_collision: (e) =>
@@ -77,6 +94,7 @@ export class Player extends Entity
         Combo\increase 10
 
     update: (delta, total_time) =>
+        @engine_particles_smoke\update delta
         @engine_particles\update delta
         dpos = Vec2!
         if keyboard.isDown "a"
@@ -102,6 +120,7 @@ export class Player extends Entity
             @shield_flashing_cur_status = (math.floor(total_time * 5)) % 2 == 0
 
         @pos = @pos\add dpos\scale delta * @speed
-        @engine_particles\setPosition @pos.x, @pos.y
+        @engine_particles_smoke\setPosition @pos.x - 35, @pos.y
+        @engine_particles\setPosition @pos.x - 35, @pos.y
 
         World\test_collision @
