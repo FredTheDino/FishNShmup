@@ -1,7 +1,7 @@
 gfx = love.graphics
 
 class HitEffect extends Entity
-    new: (x, y, asset) =>
+    new: (x, y, asset, rate) =>
         super!
         @particles = gfx.newParticleSystem Assets\get asset
         @particles\setPosition x, y
@@ -15,7 +15,7 @@ class HitEffect extends Entity
         @particles\setParticleLifetime 0.6, 0.8
 
         @particles\setSpread math.pi * 2
-        @particles\setEmissionRate 100
+        @particles\setEmissionRate rate
         @particles\update 1
         @particles\setEmissionRate 0
         @lifetime = 2.0
@@ -67,6 +67,7 @@ export class Shot extends Entity
             @alive = false
             other\damage(1)
             if other.player
-                World\add_entity HitEffect @pos.x, @pos.y, "laser_1_part_1"
+                World\add_entity HitEffect @pos.x, @pos.y, "laser_1_part_1", 100
             else
-                World\add_entity HitEffect @pos.x, @pos.y, "laser_2_part_1"
+                World\add_entity HitEffect @pos.x, @pos.y, "dmg_part_2", 5
+                World\add_entity HitEffect @pos.x, @pos.y, "dmg_part_1", 20
