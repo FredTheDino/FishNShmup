@@ -18,7 +18,9 @@ export class Player extends Entity
         @die_sfx = audio.newSource Assets\get "explosion_dead.wav"
 
         @engine_particles = gfx.newParticleSystem Assets\get "laser_2_part_1"
-        @engine_particles\setColors 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.75, 1.0, 1.0, 1.0, 0.0
+        @engine_particles\setColors 1.0, 1.0, 1.0, 1.0,
+                                    1.0, 1.0, 1.0, 0.75,
+                                    1.0, 1.0, 1.0, 0.0
         @engine_particles\setSizes 4.0, 4.5, 2.5, 2.0
         @engine_particles\setSpread 0.3
         @engine_particles\setDirection math.pi
@@ -29,7 +31,9 @@ export class Player extends Entity
 
         @engine_particles_smoke = gfx.newParticleSystem Assets\get "laser_2_part_1"
         @engine_particles_smoke\setSizes 4.0, 4.5, 8.5, 9.0
-        @engine_particles_smoke\setColors 0.0, 0.0, 0.0, 0.5, 0.0, 0.0, 0.0, 0.45, 0.0, 0.0, 0.0, 0.0
+        @engine_particles_smoke\setColors 0.0, 0.0, 0.0, 0.5,
+                                          0.0, 0.0, 0.0, 0.45,
+                                          0.0, 0.0, 0.0, 0.0
         @engine_particles_smoke\setSpread 1
         @engine_particles_smoke\setDirection math.pi
         @engine_particles_smoke\setSpeed 100, 300
