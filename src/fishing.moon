@@ -19,10 +19,32 @@ export class Fishing
 
     @sin_speed = @difficulties[1][2]
 
-    @top_x = 250
-    @top_y = 250
+    @box = Vec2 250, 100
     @box_w = 250
-    @box_h = 40
+    @box_h = 32
+
+    @ship_img = nil
+    @rod_img = nil
+    @float_img = nil
+
+    --TODO animate towards
+    --TODO y-variance
+    @ship_base = Vec2 600, 300
+    @ship_target = @ship_base
+    @ship_draw_offset = Vec2 48, -40
+    @ship_speed = 50
+
+    -- call @update_bezier
+    @rod_target = nil
+    @float_target = nil
+    @line_curve = nil
+
+    @load: =>
+        @@ship_img = Assets\get "ship.png"
+        @@rod_img = Assets\get "rod.png"
+        @@float_img = Assets\get "float.png"
+
+        @@update_bezier!
 
     @new_game: (difficulty = 1) =>
         @@current = 0.5
@@ -60,32 +82,90 @@ export class Fishing
         elseif @@score > 0
             @@score -= 2
 
+        if @@score < 0
+            @@score = 0
         if @@score > 500
             World.gone_fishing = false
 
-        print(@@score, @@current)
+        @@ship_target = @@ship_base\add Vec2 50 * @@current, 0
+
+        dpos = Vec2!
+        if keyboard.isDown "a"
+            dpos.x += -1
+        if keyboard.isDown "w"
+            dpos.y += -1
+        if keyboard.isDown "s"
+            dpos.y += 1
+        if keyboard.isDown "d"
+            dpos.x += 1
+        @@ship_target = @@ship_target\add dpos\scale delta * @@ship_speed
+
+        @@update_bezier!
+
+    @update_bezier: =>
+        @@rod_target = Vec2 @@ship_target.x + @@ship_draw_offset.x - 115,
+                            @@ship_target.y + @@ship_draw_offset.y - 35
+
+        @@float_target = Vec2 300, 300
+
+        if not @@line_curve
+            @@line_curve = love.math.newBezierCurve @@rod_target.x, @@rod_target.y,
+                                                    450, 300,
+                                                    @@float_target.x + 10, @@float_target.y
+        else
+            @@line_curve\setControlPoint 1, @@rod_target.x, @@rod_target.y
 
     @draw: =>
         -- left outer
-        gfx.setColor 255, 0, 0
-        gfx.rectangle "fill", @@top_x, @@top_y, @@box_w * @@bar_start, @@box_h
+        gfx.setColor 1.0, 0.0, 0.0
+        gfx.rectangle "fill", @@box.x, @@box.y, @@box_w * @@bar_start, @@box_h
 
         -- middle
-        gfx.setColor 0, 150, 0
-        gfx.rectangle "fill", @@top_x + @@box_w * @@bar_start, @@top_y, @@box_w * @@bar_end, @@box_h
+        gfx.setColor 0.0, 0.8, 0.0
+        gfx.rectangle "fill", @@box.x + @@box_w * @@bar_start, @@box.y, @@box_w * @@bar_end, @@box_h
 
         -- right outer
-        gfx.setColor 255, 0, 0
-        gfx.rectangle "fill", @@top_x + @@box_w * @@bar_end, @@top_y, @@box_w * @@bar_start, @@box_h
+        gfx.setColor 1.0, 0.0, 0.0
+        gfx.rectangle "fill", @@box.x + @@box_w * @@bar_end, @@box.y, @@box_w * @@bar_start, @@box_h
 
         -- outer box
-        gfx.setColor 0, 0, 0
-        gfx.rectangle "line", @@top_x, @@top_y, @@box_w, @@box_h
+        gfx.setColor 0.0, 0.0, 0.0
+        gfx.rectangle "line", @@box.x, @@box.y, @@box_w, @@box_h
 
         -- line
-        gfx.setColor 0, 0, 0
-        current_middle = @@top_x + @@box_w * @@current
-        gfx.rectangle "fill", current_middle - 8, @@top_y, 16, @@box_h
+        gfx.setColor 0.0, 0.0, 0.0
+        current_middle = @@box.x + @@box_w * @@current
+        gfx.rectangle "fill", current_middle - 8, @@box.y, 16, @@box_h
 
         -- score
         gfx.print @@score, 50, 50
+
+        gfx.setColor 1.0, 1.0, 1.0
+
+        -- rod
+        gfx.draw @@rod_img,
+                 @@ship_target.x + @@ship_draw_offset.x - 115,
+                 @@ship_target.y + @@ship_draw_offset.y - 35,
+                 0,
+                 1.8,
+                 1.8
+
+        -- float
+        gfx.draw @@float_img,
+                 @@float_target.x,
+                 @@float_target.y,
+                 0,
+                 1.5,
+                 1.5
+
+        -- fishing_line
+        gfx.setLineWidth 3
+        --gfx.setColor 0.9, 0.9, 0.9 TODO
+        gfx.line @@line_curve\render 5
+        gfx.setLineWidth 1
+
+        -- player model
+        gfx.draw @@ship_img,
+                 @@ship_target.x + @@ship_draw_offset.x,
+                 @@ship_target.y + @@ship_draw_offset.y,
+                 math.pi/2

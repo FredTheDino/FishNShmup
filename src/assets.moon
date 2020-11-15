@@ -21,8 +21,10 @@ export class Assets
         @load_img("dmg_part_3.png")
         @load_img("dmg_part_4.png")
         @load_img("dmg_part_5.png")
-        @load_img("ship.png")
+        @load_img("float.png")
+        @load_img("rod.png")
         @load_img("shield.png")
+        @load_img("ship.png")
         @load_img("tmp_engine.png")
         @load_sound("laser_sound.wav") --friendly
         @load_sound("pewpew.wav") --enemy
