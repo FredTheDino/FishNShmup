@@ -93,7 +93,16 @@ export class ShootSpeedItem extends Item
             @alive = false
             other\increase_shoot_speed!
 
-items = { FishingItem, ShootSpeedItem, ShootBurstItem }
+items = { FishingItem,
+    ShootBurstItem,
+    ShootSpeedItem,
+    ShootMissileItem,
+    ShootTripleItem,
+    ShootBurstItem,
+    ShootSpeedItem,
+    ShootMissileItem,
+    ShootTripleItem,
+}
 export random_item = ->
     i = math.random 1, #items
     items[i]

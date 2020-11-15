@@ -184,10 +184,9 @@ export class Cod extends Enemy
         World\add_entity Shot @pos, Vec2(-1, random_real(-1, 1)), 500, @, @radius
 
     try_fire: =>
-        super\fire!
         if @shoottimer > 0
             return
-        if @burst == 0
+        if @burst < 0
             @burst = @burst_size
 
         if @burst == 1

@@ -178,13 +178,47 @@ formation_table = {
         }
     },
 
+    {
+        length: 300,
+        spawn: {
+            { Whale, top_third, 0 },
+            { Eel, center_y, 0 },
+
+            { Whale, bot_third, 200 },
+            { Eel, center_y, 200 },
+        }
+    },
+
+    {
+        length: 600,
+        spawn: {
+            { Pike, quarter(0), 0 },
+            { Pike, quarter(1), 0 },
+            { Pike, quarter(2), 0 },
+            { Pike, quarter(3), 0 },
+            { Pike, quarter(4), 0 },
+
+            { Pike, quarter(0), 100 },
+            { Pike, quarter(1), 100 },
+            { Pike, quarter(2), 100 },
+            { Pike, quarter(3), 100 },
+            { Pike, quarter(4), 100 },
+
+            { Whale, top_third, 200 },
+            { Eel, center_y, 200 },
+
+            { Whale, bot_third, 300 },
+            { Eel, center_y, 300 },
+        }
+    },
+
 
     {
         length: 300,
         spawn: {
             { Cod, center_y, 0 },
-            { Cod, center_y, 50 },
-            { Cod, center_y, 100 },
+            { Cod, top_third, 50 },
+            { Cod, bot_third, 100 },
         }
     },
 
@@ -198,7 +232,7 @@ offset = 0
 
 export start_formation = ->
     current_formation = nil
-    last_formation = 9
+    last_formation = 18
     left = 0
     offset = 0
 
