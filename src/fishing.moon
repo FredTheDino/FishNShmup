@@ -25,9 +25,13 @@ export class Fishing
     @box_w = 250
     @box_h = 32
 
+    -- call @load
     @ship_img = nil
     @rod_img = nil
     @float_img = nil
+    @water_tile = nil
+
+    @water_t = 0
 
     --TODO animate towards
     --TODO y-variance
@@ -45,6 +49,7 @@ export class Fishing
         @@ship_img = Assets\get "ship"
         @@rod_img = Assets\get "rod"
         @@float_img = Assets\get "float"
+        @@water_tile = Assets\get "water_bg"
 
         @@update_bezier!
 
@@ -68,6 +73,7 @@ export class Fishing
 
         @total_t += delta
         @@current += math.sin(3*@total_t) * random_real(delta / 2, delta) * @@sin_speed
+        @@water_t = (@@water_t + 2 * delta) % 1
 
         if keyboard.isDown "a"
             @@current -= @@cursor_speed * delta
@@ -120,6 +126,17 @@ export class Fishing
             @@line_curve\setControlPoint 1, @@rod_target.x, @@rod_target.y
 
     @draw: =>
+        gfx.setColor 1.0, 1.0, 1.0, 1.0
+
+        w = @@water_tile\getWidth!
+        h = @@water_tile\getHeight!
+        scale = 2
+        -- water background
+        for y = 0, 3
+            for x = 0, 5
+                gfx.draw @@water_tile, w*x*scale - w*@@water_t*scale, h*y*scale, 0, scale, scale
+
+
         -- left outer
         gfx.setColor 1.0, 0.0, 0.0
         gfx.rectangle "fill", @@box.x, @@box.y, @@box_w * @@bar_start, @@box_h
