@@ -169,12 +169,21 @@ formation_table = {
             { FishingItem, center_y, 0 },
         }
     },
+
+    { length: 300, spawn: {} }
 }
 
 current_formation = nil
 last_formation = 0
 left = 0
 offset = 0
+
+export start_formation = ->
+    current_formation = nil
+    last_formation = 0
+    left = 0
+    offset = 0
+
 export update_spawner = (delta) ->
     if left <= 0
         last_formation += 1

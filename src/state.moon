@@ -45,6 +45,10 @@ export class State
 
     @start_playing: =>
         State.current = State.playing
+        start_formation!
+        last_formation = 0
+        left = 0
+        offset = 0
         Combo\reset_start!
         World\reset!
         World\add_entity Player!
