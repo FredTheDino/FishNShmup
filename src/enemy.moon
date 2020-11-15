@@ -14,7 +14,10 @@ class Enemy extends Entity
         @shot_sound = audio.newSource Assets\get "pewpew.wav"
 
     fire_sound: =>
-        @shot_sound\clone!\play!
+        sfx = @shot_sound\clone!
+        sfx\setPitch random_real 0.80, 0.90
+        sfx\setVolume random_real 0.80, 0.90
+        sfx\play!
 
     fire: =>
         @fire_sound!
