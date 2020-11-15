@@ -442,7 +442,7 @@ offset = 0
 
 export start_formation = ->
     current_formation = nil
-    last_formation = 32
+    last_formation = 0
     left = 0
     offset = 0
 
