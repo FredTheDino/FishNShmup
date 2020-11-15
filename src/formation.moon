@@ -198,6 +198,8 @@ formation_table = {
             { Pike, quarter(3), 0 },
             { Pike, quarter(4), 0 },
 
+            { FishingItem, center_y, 0 },
+
             { Pike, quarter(0), 100 },
             { Pike, quarter(1), 100 },
             { Pike, quarter(2), 100 },
@@ -214,7 +216,7 @@ formation_table = {
 
 
     {
-        length: 300,
+        length: 400,
         spawn: {
             { Cod, center_y, 0 },
             { Cod, top_third, 50 },
@@ -222,7 +224,209 @@ formation_table = {
         }
     },
 
-    { length: 300, spawn: {} }
+    {
+        length: 400,
+        spawn: {
+            { Whale, center_y, 0 },
+            { Cod, top_third, 50 },
+            { Cod, bot_third, 50 },
+        }
+    },
+
+    {
+        length: 400,
+        spawn: {
+            { Cod, top_third, 50 },
+            { Cod, bot_third, 50 },
+
+            { Eel, center_y, 100 },
+            { Eel, center_y, 150 },
+            { Eel, center_y, 200 },
+            
+            { Cod, top_third, 150 },
+            { Cod, bot_third, 150 },
+            { FishingItem, center_y, 0 },
+        }
+    },
+
+    {
+        length: 400,
+        spawn: {
+            { Pike, center_y, 0 },
+            { Pike, center_y, 50 },
+            { Flounder, center_y, 100 },
+        }
+    },
+
+    {
+        length: 400,
+        spawn: {
+            { Flounder, top_third, 50 },
+            { Flounder, bot_third, 50 },
+        }
+    },
+
+    {
+        length: 400,
+        spawn: {
+            { Flounder, top_third, 50 },
+            { Cod, center_y, 50 },
+            { Flounder, bot_third, 50 },
+        }
+    },
+
+    {
+        length: 300,
+        spawn: {
+            { Pike, quarter(0), 0 },
+            { Pike, quarter(1), 0 },
+            { Pike, quarter(2), 0 },
+            { Pike, quarter(3), 0 },
+            { Pike, quarter(4), 0 },
+
+            { FishingItem, center_y, 0 },
+            { Pike, quarter(0), 100 },
+            { Pike, quarter(1), 100 },
+            { Pike, quarter(2), 100 },
+            { Pike, quarter(3), 100 },
+            { Pike, quarter(4), 100 },
+
+            { Flounder, top_third, 50 },
+            { Flounder, bot_third, 50 },
+        }
+    },
+
+    {
+        length: 300,
+        spawn: {
+            { Pike, quarter(0), 0 },
+            { Pike, quarter(1), 0 },
+            { Pike, quarter(2), 0 },
+            { Pike, quarter(3), 0 },
+            { Pike, quarter(4), 0 },
+
+            { Pike, quarter(0), 100 },
+            { Pike, quarter(1), 100 },
+            { Pike, quarter(2), 100 },
+            { Pike, quarter(3), 100 },
+            { Pike, quarter(4), 100 },
+
+            { Cod, top_third, 50 },
+            { Cod, bot_third, 50 },
+            { Cod, top_third, 150 },
+            { Cod, bot_third, 150 },
+        }
+    },
+
+    {
+        length: 300,
+        spawn: {
+            { Perch, quarter(1), 0 },
+            { Perch, quarter(3), 0 },
+
+            { Perch, quarter(0), 150 },
+            { Perch, quarter(2), 175 },
+            { Perch, quarter(4), 150 },
+        }
+    },
+
+    {
+        length: 300,
+        spawn: {
+            { Perch, quarter(1), 150 },
+            { Perch, quarter(3), 150 },
+
+            { Pike, quarter(0), 0 },
+            { Pike, quarter(1), 0 },
+            { Pike, quarter(2), 0 },
+            { Pike, quarter(3), 0 },
+            { Pike, quarter(4), 0 },
+
+            { Pike, quarter(0), 100 },
+            { Pike, quarter(1), 100 },
+            { Pike, quarter(2), 100 },
+            { Pike, quarter(3), 100 },
+            { Pike, quarter(4), 100 },
+            { FishingItem, center_y, 0 },
+        }
+    },
+
+    {
+        length: 300,
+        spawn: {
+            { Cod, quarter(1), 150 },
+            { Cod, quarter(3), 150 },
+
+            { Pike, quarter(0), 0 },
+            { Pike, quarter(1), 0 },
+            { Pike, quarter(2), 0 },
+            { Pike, quarter(3), 0 },
+            { Pike, quarter(4), 0 },
+
+            { Flounder, quarter(0), 100 },
+            { Flounder, quarter(1), 100 },
+            { Flounder, quarter(2), 100 },
+            { Flounder, quarter(3), 100 },
+            { Flounder, quarter(4), 100 },
+
+            { FishingItem, center_y, 0 },
+        }
+    },
+
+    {
+        length: 300,
+        spawn: {
+            { Whale, quarter(0), 50 },
+            { Whale, quarter(2), 75 },
+            { Whale, quarter(4), 50 },
+
+            { Pike, quarter(0), 0 },
+            { Pike, quarter(1), 0 },
+            { Pike, quarter(2), 0 },
+            { Pike, quarter(3), 0 },
+            { Pike, quarter(4), 0 },
+
+            { FishingItem, center_y, 0 },
+        }
+    },
+
+    {
+        length: 700,
+        spawn: {
+            { Whale, quarter(0), 150 },
+            { Whale, quarter(2), 175 },
+            { Whale, quarter(4), 150 },
+
+            { Perch, quarter(1), 175 },
+            { Perch, quarter(3), 175 },
+
+            { Perch, quarter(1), 175 },
+            { Perch, quarter(3), 175 },
+
+            { Cod, quarter(1), 100 },
+            { Cod, quarter(3), 100 },
+
+            { Salmon, quarter(0), 100 },
+            { Salmon, quarter(1), 100 },
+            { Salmon, quarter(2), 100 },
+            { Salmon, quarter(3), 100 },
+            { Salmon, quarter(4), 100 },
+
+            { Eel, quarter(2), 50 },
+            { Eel, quarter(3), 50 },
+
+            { Pike, quarter(0), 0 },
+            { Pike, quarter(1), 0 },
+            { Pike, quarter(2), 0 },
+            { Pike, quarter(3), 0 },
+            { Pike, quarter(4), 0 },
+
+            { FishingItem, center_y, 0 },
+        }
+    },
+
+
+    { length: 500, spawn: {} }
 }
 
 current_formation = nil
@@ -232,7 +436,7 @@ offset = 0
 
 export start_formation = ->
     current_formation = nil
-    last_formation = 18
+    last_formation = 31
     left = 0
     offset = 0
 

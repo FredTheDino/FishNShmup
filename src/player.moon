@@ -5,6 +5,7 @@ audio = love.audio
 export class Player extends Entity
     new: =>
         super!
+        @radius = 25
         @player = true
         @pos = Vec2(gfx.getWidth!, gfx.getHeight!)\div 2
         @draw_offset = Vec2(48, -40)

@@ -221,6 +221,8 @@ export class Flounder extends Enemy
     new: (pos) =>
         super pos
         @vel = Vec2 -100, 0
+        @fire_rate = 0.3
+        @health = 1
 
     fire: =>
         @fire_sound!
@@ -237,6 +239,7 @@ export class Flounder extends Enemy
 export class Perch extends Enemy
     new: (pos) =>
         super pos
+        @health = 2
 
     fire: =>
         @fire_sound!
@@ -245,7 +248,7 @@ export class Perch extends Enemy
 
     update: (delta) =>
         super\update delta
-        @vel = Vec2 -100, @anim 1.5, 100
+        @vel = Vec2 -100, @anim 1.5, 50
 
     draw: =>
         super\draw!
