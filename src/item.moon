@@ -30,4 +30,5 @@ export class FishingItem extends Item
             @alive = false
             Fishing\new_game!
             State\reset_transition!
+            State.main_music\pause!
             State.current = State.fishing

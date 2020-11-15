@@ -57,6 +57,8 @@ export class Assets
         @load_sound("laser_sound.wav") --friendly
         @load_sound("pewpew.wav") --enemy
 
+        @load_sound("retro-funk.mp3") --main music
+
         larger_font = love.graphics.newFont 20
         love.graphics.setFont larger_font
 

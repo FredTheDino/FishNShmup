@@ -19,6 +19,7 @@ keyboard = love.keyboard
 
 love.load = (arg) ->
     Assets\load!
+    State\load!
     Fishing\load!
     Combo\reset!
     World\add_entity Player!
@@ -38,6 +39,8 @@ love.load = (arg) ->
                                            120,
                                            120,
                                            1.0
+
+    State.main_music\play!
 
 total_t = 0
 prev_f = false --TODO framework?

@@ -1,4 +1,5 @@
 gfx = love.graphics
+audio = love.audio
 
 export class State
     @main_menu = 0
@@ -9,6 +10,10 @@ export class State
     @trans_cur = 0
 
     @current = @main_menu
+
+    @load: =>
+        @@main_music = audio.newSource Assets\get "retro-funk.mp3"
+        @@main_music\setLooping true
 
     @draw_main_menu: =>
         gfx.print "FishNShips", 50, 50
