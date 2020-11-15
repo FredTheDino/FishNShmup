@@ -13,8 +13,10 @@ export class State
 
     @load: =>
         @@main_music = audio.newSource Assets\get "retro-funk.mp3"
-        @@fishing_music = audio.newSource Assets\get "fishing.mp3"
         @@main_music\setLooping true
+        @@main_music\setVolume 0.5
+        @@fishing_music = audio.newSource Assets\get "fishing.mp3"
+        @@fishing_music\setVolume 0.8
 
     @draw_main_menu: =>
         gfx.print "FishNShips", 50, 50
