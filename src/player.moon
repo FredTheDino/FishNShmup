@@ -15,6 +15,7 @@ export class Player extends Entity
         @img = Assets\get "ship"
         @shield_img = Assets\get "shield"
         @shot_sfx = audio.newSource Assets\get "laser_sound.wav"
+        @die_sfx = audio.newSource Assets\get "explosion_dead.wav"
 
         @engine_particles = gfx.newParticleSystem Assets\get "tmp_engine"
         @engine_particles\setParticleLifetime 1, 2
@@ -69,6 +70,7 @@ export class Player extends Entity
             if @health < 0
                 @health = 0
                 print("player died")
+                @die_sfx\clone!\play!
                 State.current = State.died
 
     landed_hit: =>

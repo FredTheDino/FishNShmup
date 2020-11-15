@@ -54,6 +54,7 @@ export class Assets
         @load_img("water_part_2")
         @load_img("water_part_3")
 
+        @load_sound("explosion_dead.wav")
         @load_sound("laser_sound.wav") --friendly
         @load_sound("pewpew.wav") --enemy
 
