@@ -13,6 +13,7 @@ export class State
 
     @load: =>
         @@main_music = audio.newSource Assets\get "retro-funk.mp3"
+        @@fishing_music = audio.newSource Assets\get "fishing.mp3"
         @@main_music\setLooping true
 
     @draw_main_menu: =>

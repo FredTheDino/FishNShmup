@@ -58,6 +58,7 @@ export class Assets
         @load_sound("pewpew.wav") --enemy
 
         @load_sound("retro-funk.mp3") --main music
+        @load_sound("fishing.mp3")
 
         larger_font = love.graphics.newFont 20
         love.graphics.setFont larger_font
