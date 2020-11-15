@@ -20,4 +20,5 @@ export class GenericPickupItem extends Item
         if other.player
             @alive = false
             print("item picked up")
+            Fishing\new_game!
             World.gone_fishing = true

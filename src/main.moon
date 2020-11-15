@@ -31,6 +31,7 @@ prev_f = false --TODO framework?
 
 love.load = (arg) ->
     Assets\load!
+    Fishing\load!
     Combo\reset!
     World\add_entity Player!
     World\add_entity GenericPickupItem!
