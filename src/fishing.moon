@@ -95,6 +95,7 @@ export class Fishing
         if @@score > target_score
             State.fishing_music\stop!
             State.main_music\play!
+            State\reset_transition!
             State.current = State.playing
 
         @@ship_target = @@ship_base\add Vec2 50 * @@current, 0
