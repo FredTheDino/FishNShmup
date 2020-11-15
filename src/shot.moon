@@ -1,13 +1,13 @@
 gfx = love.graphics
 
 class HitEffect extends Entity
-    new: (x, y) =>
+    new: (x, y, asset) =>
         super!
-        @particles = gfx.newParticleSystem Assets\get "laser_1_part_1"
+        @particles = gfx.newParticleSystem Assets\get asset
         @particles\setPosition x, y
         @particles\setColors 1.0, 1.0, 1.0, 0.2,
                              1.0, 1.0, 1.0, 0.2,
-                             0.0, 0.0, 0.0, 0.0
+                             0.0, 0.0, 1.0, 0.0
 
         @particles\setSizes 4.0, 4.5, 2.5, 2.0
         @particles\setDirection 0
@@ -66,5 +66,7 @@ export class Shot extends Entity
             @owner\landed_hit!
             @alive = false
             other\damage(1)
-            World\add_entity HitEffect @pos.x, @pos.y
-
+            if other.player
+                World\add_entity HitEffect @pos.x, @pos.y, "laser_1_part_1"
+            else
+                World\add_entity HitEffect @pos.x, @pos.y, "laser_2_part_1"
