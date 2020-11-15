@@ -23,7 +23,11 @@ class HitEffect extends Entity
     update: (delta) =>
         @lifetime -= delta
         if @lifetime < 0
-            @alive = 0
+            @alive = false
+        if @pos.x < -@radius
+            @alive = false
+        if @pos.x > gfx.getWidth! + @radius
+            @alive = false
         @particles\update delta
 
     draw: =>

@@ -8,7 +8,7 @@ class Enemy extends Entity
         @pos = pos
         @vel = Vec2!
         @fire_rate = 0.2
-        @shoottimer = 0
+        @shoottimer = 0.5
         @health = 3
         @color = { 1.0, 0.0, 1.0 }
         @shot_sound = audio.newSource Assets\get "pewpew.wav"
@@ -36,7 +36,7 @@ class Enemy extends Entity
         sfx = @hit_sound\clone!
         sfx\setPitch random_real 0.70, 0.90
         sfx\play!
-        if @health < 0
+        if @health <= 0
             @alive = false
 
     landed_hit: =>
@@ -48,13 +48,7 @@ class Enemy extends Entity
         @try_fire!
 
         if @pos.x < -@radius
-            alive = false
-
-        if @pos.y < -@radius
-            alive = false
-
-        if @pos.y - @radius > gfx.getHeight!
-            alive = false
+            @alive = false
 
         World\test_collision @
 
@@ -97,7 +91,7 @@ export class Pike extends Enemy
     new: (pos) =>
         super pos
         @vel = Vec2 -100, 0
-        @health = 2
+        @health = 3
 
     fire: =>
 
@@ -112,9 +106,8 @@ export class Salmon extends Enemy
         super pos
         @vel = Vec2 -100, 0
         @radius = 10
-
-    new: (pos) =>
-        super pos
+        @fire_rate = 0.5
+        @health = 1
 
     update: (delta) =>
         super\update delta
@@ -134,6 +127,8 @@ export class Whale extends Enemy
         super pos
         @vel = Vec2 -100, 0
         @ship_alt = math.random(1, 2)
+        @fire_rate = 0.35
+        @health = 5
     
     fire: =>
         @fire_sound!

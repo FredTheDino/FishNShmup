@@ -25,7 +25,6 @@ love.load = (arg) ->
     World\add_entity Player!
     World\add_entity FishingItem!
     gfx.setBackgroundColor 238 / 255, 223 / 255, 203 / 255
-    World\add_entity Perch Vec2(gfx.getWidth! * 2, gfx.getHeight!)\div(2)
 
     for i = 1, 4
         Background\add_bg_layer Background "bg_cloud_"..i,

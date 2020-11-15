@@ -80,7 +80,7 @@ export class Player extends Entity
         if @shoottimer > 0
             return
         @shoottimer = @fire_rate
-        World\add_entity Shot @pos, Vec2(1, 0), 500, @, @radius + 5
+        World\add_entity Shot @pos, Vec2(1, @vely * 0.2), 500, @, @radius + 5
         @shot_sfx\clone!\play!
 
     damage: (dmg) =>
