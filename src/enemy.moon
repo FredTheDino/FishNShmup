@@ -33,7 +33,9 @@ class Enemy extends Entity
 
     damage: (dmg) =>
         @health -= dmg
-        @hit_sound\clone!\play!
+        sfx = @hit_sound\clone!
+        sfx\setPitch random_real 0.70, 0.90
+        sfx\play!
         if @health < 0
             @alive = false
 
