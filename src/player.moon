@@ -11,6 +11,8 @@ export class Player extends Entity
         @speed = 256
         @shoottimer = 0
         @fire_rate = 0.2
+        @fire_rate_incd = 0.1
+        @fire_rate_incd_timer = 0
         @health = 3
         @img = Assets\get "ship"
         @shield_img = Assets\get "shield"
@@ -79,7 +81,10 @@ export class Player extends Entity
     fire: =>
         if @shoottimer > 0
             return
-        @shoottimer = @fire_rate
+        if @fire_rate_incd_timer > 0
+            @shoottimer = @fire_rate_incd
+        else
+            @shoottimer = @fire_rate
         World\add_entity Shot @pos, Vec2(1, @vely * 0.2), 500, @, @radius + 5
         @shot_sfx\clone!\play!
 
@@ -114,6 +119,11 @@ export class Player extends Entity
             dpos.x += 1
         @vely = (@vely + dpos.y) * 0.5
 
+        if @fire_rate_incd_timer > 0
+            @fire_rate_incd_timer -= delta
+            if @fire_rate_incd_timer < 0
+                @fire_rate_incd_timer = 0
+
         @shoottimer -= delta
         if keyboard.isDown "space"
             @fire!
@@ -132,3 +142,6 @@ export class Player extends Entity
         @engine_particles\setPosition @pos.x - 35, @pos.y
 
         World\test_collision @
+
+    increase_shoot_speed: =>
+        @fire_rate_incd_timer += 3

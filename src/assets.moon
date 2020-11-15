@@ -21,6 +21,7 @@ export class Assets
         @load_img("dmg_part_3")
         @load_img("dmg_part_4")
         @load_img("dmg_part_5")
+        @load_img("fish_3")
         @load_img("float")
         @load_img("laser_1")
         @load_img("laser_1_part_1")
@@ -54,13 +55,13 @@ export class Assets
         @load_img("water_part_2")
         @load_img("water_part_3")
 
-        @load_sound("hit.wav")
         @load_sound("explosion_dead.wav")
+        @load_sound("hit.wav")
         @load_sound("laser_sound.wav") --friendly
         @load_sound("pewpew.wav") --enemy
 
-        @load_sound("retro-funk.mp3") --main music
         @load_sound("fishing.mp3")
+        @load_sound("retro-funk.mp3") --main music
 
         larger_font = love.graphics.newFont 20
         love.graphics.setFont larger_font
