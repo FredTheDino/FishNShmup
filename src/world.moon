@@ -7,6 +7,9 @@ entity_overlap = (a, b) ->
 export class World
     @entities = {}
     @gone_fishing = false
+    
+    @reset: =>
+        @@entities = {}
 
     @draw: =>
         for e in *@@entities

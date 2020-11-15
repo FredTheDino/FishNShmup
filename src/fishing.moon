@@ -1,7 +1,7 @@
 keyboard = love.keyboard
 gfx = love.graphics
 
-target_score = 750
+target_score = 500
 
 x_pos = -> gfx.getWidth! + 30
 

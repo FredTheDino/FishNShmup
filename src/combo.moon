@@ -13,6 +13,10 @@ export class Combo
             @current_combo_stage = 0
         @score += score * @multiplier
 
+    @reset_start: =>
+        @score = 0
+        @reset!
+
     @reset: =>
         @combo = 0
         @current_combo_stage = 0

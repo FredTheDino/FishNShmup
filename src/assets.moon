@@ -37,6 +37,7 @@ export class Assets
         @load_img("laser_2_part_2")
         @load_img("laser_2_part_3")
         @load_img("laser_2_part_4")
+        @load_img("logo")
         @load_img("missile")
         @load_img("rod")
         @load_img("shield")

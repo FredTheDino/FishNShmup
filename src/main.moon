@@ -21,8 +21,9 @@ love.load = (arg) ->
     Assets\load!
     State\load!
     Fishing\load!
-    Combo\reset!
-    World\add_entity Player!
+
+    State.main_music\play!
+
     gfx.setBackgroundColor 238 / 255, 223 / 255, 203 / 255
 
     for i = 1, 4
@@ -38,17 +39,18 @@ love.load = (arg) ->
                                            120,
                                            1.0
 
-    State.main_music\play!
-
 total_t = 0
 
 update_main_menu = (dt) ->
-    if keyboard.isDown "return"
-        State.current = State.playing
+    if keyboard.isDown "space"
+        State\start_playing!
 
 update_died = (dt) ->
+    if not State.highscore or Combo.score > State.highscore
+        State.highscore = Combo.score
+    
     if keyboard.isDown "return"
-        print("Restarting") --TODO
+        State.current = State.main_menu
 
 update_fishing = (dt, total_t) -> Fishing\update dt, total_t
 
