@@ -40,6 +40,9 @@ export class Fishing
     @ship_draw_offset = Vec2 48, -40
     @ship_speed = 50
 
+    @float_base = Vec2 300, 300
+
+    -- bad variable names
     -- call @update_bezier
     @rod_target = nil
     @float_target = nil
@@ -51,7 +54,7 @@ export class Fishing
         @@float_img = Assets\get "float"
         @@water_tile = Assets\get "water_bg"
 
-        @@update_bezier!
+        @@update_bezier 0
 
     @new_game: (difficulty = 1) =>
         @@current = 0.5
@@ -65,7 +68,7 @@ export class Fishing
         @@bar_end = 0.5 + @@bar_width
 
 
-    @update: (delta) =>
+    @update: (delta, total_t) =>
         if keyboard.isDown "1"
             @@new_game 1
         if keyboard.isDown "2"
@@ -111,20 +114,21 @@ export class Fishing
             dpos.x += 1
         @@ship_target = @@ship_target\add dpos\scale delta * @@ship_speed
 
-        @@update_bezier!
+        @@update_bezier total_t
 
-    @update_bezier: =>
+    @update_bezier: (total_t) =>
         @@rod_target = Vec2 @@ship_target.x + @@ship_draw_offset.x - 115,
                             @@ship_target.y + @@ship_draw_offset.y - 35
 
-        @@float_target = Vec2 300, 300
+        @@float_target = @@float_base\add Vec2 0, math.sin(3 * total_t) * 8
 
         if not @@line_curve
             @@line_curve = love.math.newBezierCurve @@rod_target.x, @@rod_target.y,
                                                     450, 300,
-                                                    @@float_target.x + 10, @@float_target.y
+                                                    @@float_target.x + 8, @@float_target.y
         else
             @@line_curve\setControlPoint 1, @@rod_target.x, @@rod_target.y
+            @@line_curve\setControlPoint 3, @@float_target.x + 8, @@float_target.y
 
     @draw: =>
         gfx.setColor 1.0, 1.0, 1.0, 1.0

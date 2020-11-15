@@ -51,7 +51,7 @@ update_died = (dt) ->
     if keyboard.isDown "return"
         print("Restarting") --TODO
 
-update_fishing = (dt) -> Fishing\update dt
+update_fishing = (dt, total_t) -> Fishing\update dt, total_t
 
 update_game = (dt) ->
     if done_spawning_enemies!
@@ -76,7 +76,7 @@ love.update = (dt) ->
     elseif State.current == State.died
         update_died dt
     elseif State.current == State.fishing
-        update_fishing dt
+        update_fishing dt, total_t
     elseif State.current == State.playing
         update_game dt
 
