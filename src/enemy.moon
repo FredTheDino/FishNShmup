@@ -16,7 +16,7 @@ class Enemy extends Entity
     fire_sound: =>
         sfx = @shot_sound\clone!
         sfx\setPitch random_real 0.80, 0.90
-        sfx\setVolume random_real 0.80, 0.90
+        sfx\setVolume random_real 0.95, 1.00
         sfx\play!
 
     fire: =>
@@ -92,6 +92,7 @@ export class Pike extends Enemy
     new: (pos) =>
         super pos
         @vel = Vec2 -100, 0
+        @health = 2
 
     fire: =>
 

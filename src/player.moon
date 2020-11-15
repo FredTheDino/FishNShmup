@@ -46,6 +46,11 @@ export class Player extends Entity
         gfx.setColor 1.0, 1.0, 1.0
         gfx.draw @engine_particles
 
+    on_collision: (e) =>
+        if e.enemy
+            @damage 1
+            e\damage 1
+
     fire: =>
         if @shoottimer > 0
             return
