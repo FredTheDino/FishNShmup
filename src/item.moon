@@ -29,4 +29,5 @@ export class FishingItem extends Item
         if other.player
             @alive = false
             Fishing\new_game!
-            World.gone_fishing = true
+            State\reset_transition!
+            State.current = State.fishing
