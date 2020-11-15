@@ -93,6 +93,19 @@ export class ShootSpeedItem extends Item
             @alive = false
             other\increase_shoot_speed!
 
+export class PointItem extends Item
+    new: (pos) =>
+        super pos
+        @radius = 30
+        @img = Assets\get "fish_1"
+        @img_scale = 2.0
+        @img_offset = Vec2 -13, -26
+
+    on_collision: (other) =>
+        if other.player
+            @alive = false
+            Combo\increase 1000
+
 items = { FishingItem,
     ShootBurstItem,
     ShootSpeedItem,
