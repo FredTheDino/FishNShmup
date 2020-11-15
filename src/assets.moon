@@ -59,6 +59,7 @@ export class Assets
         @load_img("water_part_1")
         @load_img("water_part_2")
         @load_img("water_part_3")
+        @load_img("press_space")
 
         @load_sound("explosion_dead.wav")
         @load_sound("hit.wav")

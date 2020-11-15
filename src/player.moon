@@ -10,7 +10,7 @@ export class Player extends Entity
         @draw_offset = Vec2(48, -40)
         @speed = 256
         @shoottimer = 0
-        @health = 3
+        @health = 1
         @img = Assets\get "ship"
         @shield_img = Assets\get "shield"
         @shot_sfx = audio.newSource Assets\get "laser_sound.wav"
@@ -151,6 +151,7 @@ export class Player extends Entity
             dpos.y += 1
         if keyboard.isDown "d"
             dpos.x += 1
+
         @vely = (@vely + dpos.y) * 0.5
 
         if @fire_rate_incd_timer > 0
@@ -184,6 +185,18 @@ export class Player extends Entity
         @pos = @pos\add dpos\scale delta * @speed
         @engine_particles_smoke\setPosition @pos.x - 35, @pos.y
         @engine_particles\setPosition @pos.x - 35, @pos.y
+
+        if @pos.x < @radius
+            @pos.x = @radius
+
+        if @pos.x > gfx.getWidth! - @radius
+            @pos.x = gfx.getWidth! - @radius
+
+        if @pos.y < @radius
+            @pos.y = @radius
+
+        if @pos.y > gfx.getHeight! - @radius
+            @pos.y = gfx.getHeight! - @radius
 
         World\test_collision @
 

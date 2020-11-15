@@ -34,7 +34,7 @@ export class State
     @draw_main_menu: =>
         draw_centerd "logo", -100, 2
         -- TODO(ed): Press space to start
-        draw_centerd "logo"
+        draw_centerd "press_space"
 
         if @highscore
             gfx.setColor 0, 0, 0
