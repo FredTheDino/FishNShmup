@@ -11,9 +11,9 @@ export class Player extends Entity
         @shoottimer = 0
         @fire_rate = 0.2
         @health = 3
-        @img = Assets\get "ship.png"
+        @img = Assets\get "ship"
 
-        @engine_particles = gfx.newParticleSystem Assets\get "tmp_engine.png"
+        @engine_particles = gfx.newParticleSystem Assets\get "tmp_engine"
         @engine_particles\setParticleLifetime 1, 2
         @engine_particles\setEmissionRate 5
         @engine_particles\start!

@@ -11,10 +11,10 @@ export class BGItem extends Entity
         @pos = Vec2 x, y
         @depth = depth
         if kind == "bg_part"
-            @img = Assets\get kind .. "_" .. math.random(1, 5) .. ".png"
+            @img = Assets\get kind .. "_" .. math.random(1, 5)
 
         if kind == "bg_cloud"
-            @img = Assets\get kind .. "_" .. math.random(1, 4) .. ".png"
+            @img = Assets\get kind .. "_" .. math.random(1, 4)
 
     draw: =>
         gfx.setColor 1.0, 1.0, 1.0

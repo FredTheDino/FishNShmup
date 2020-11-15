@@ -22,6 +22,8 @@ export class World
         @@entities = [e for e in *@@entities when e.alive]
 
     @add_entity: (e) =>
+        if e.player
+            @player = e
         table.insert @@entities, e
 
     @test_collision: (a) =>
