@@ -78,14 +78,17 @@ export class Fishing
         State\reset_transition!
         State.current = State.playing
 
+    @noise = 0
     @update: (delta, total_t) =>
+
         if keyboard.isDown "1"
             @@new_game 1
         if keyboard.isDown "2"
             @@new_game 2
 
         @@total_t += delta
-        @@current += math.sin(3*@total_t) * random_real(delta / 2, delta) * @@sin_speed
+        @noise = (@noise + random_real(-1, 1)) * 0.5
+        @@current += math.sin(3*@total_t + @noise) * random_real(delta / 2, delta) * @@sin_speed
         @@water_t = (@@water_t + 2 * delta) % 1
 
         if keyboard.isDown "a"
@@ -124,13 +127,11 @@ export class Fishing
 
         @@update_bezier total_t
 
-    @noise = 0
     @update_bezier: (total_t) =>
         @@rod_target = Vec2 @@ship_target.x + @@ship_draw_offset.x - 115,
                             @@ship_target.y + @@ship_draw_offset.y - 35
 
-        @noise = (@noise + random_real(-30, 30)) * 0.5
-        @@float_target = @@float_base\add Vec2 0, math.sin(3 * total_t + @noise) * 8
+        @@float_target = @@float_base\add Vec2 0, math.sin(3 * total_t) * 8
 
         if not @@line_curve
             @@line_curve = love.math.newBezierCurve @@rod_target.x, @@rod_target.y,
