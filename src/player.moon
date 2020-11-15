@@ -48,9 +48,13 @@ export class Player extends Entity
         @shield_bar_pos_dy = -30
         @shield_bar_width = 80
 
+        @vely = 0
+
     draw: =>
         super\draw!
-        gfx.draw @img, @pos.x + @draw_offset.x, @pos.y + @draw_offset.y, math.pi/2
+        sheer = @vely * 0.2
+        w, h = @img\getPixelDimensions!
+        gfx.draw @img, @pos.x, @pos.y, math.pi/2, 1, 1, w / 2, h / 2, 0.0, sheer
 
         if @shield_on or @shield_flashing_cur_status
             gfx.setColor 1, 1, 1, 0.2 + @shield * 0.5
@@ -105,6 +109,7 @@ export class Player extends Entity
             dpos.y += 1
         if keyboard.isDown "d"
             dpos.x += 1
+        @vely = (@vely + dpos.y) * 0.5
 
         @shoottimer -= delta
         if keyboard.isDown "space"
