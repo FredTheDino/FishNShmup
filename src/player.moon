@@ -64,7 +64,7 @@ export class Player extends Entity
             if @health < 0
                 @health = 0
                 print("player died")
-                --@alive = false
+                State.current = State.died
 
     landed_hit: =>
         Combo\increase 10
