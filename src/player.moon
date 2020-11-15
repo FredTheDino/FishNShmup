@@ -1,5 +1,6 @@
 keyboard = love.keyboard
 gfx = love.graphics
+audio = love.audio
 
 export class Player extends Entity
     new: =>
@@ -13,6 +14,7 @@ export class Player extends Entity
         @health = 10
         @img = Assets\get "ship.png"
         @shield_img = Assets\get "shield.png"
+        @shot_sfx = audio.newSource Assets\get "laser_sound.wav"
 
         @engine_particles = gfx.newParticleSystem Assets\get "tmp_engine.png"
         @engine_particles\setParticleLifetime 1, 2
@@ -49,6 +51,7 @@ export class Player extends Entity
             return
         @shoottimer = @fire_rate
         World\add_entity Shot @pos, Vec2(1, 0), 500, @, @radius + 5
+        @shot_sfx\clone!\play!
 
     damage: (dmg) =>
         if @shield_on
