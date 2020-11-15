@@ -41,35 +41,38 @@ love.load = (arg) ->
 total_t = 0
 prev_f = false --TODO framework?
 
+update_main_menu = (dt) ->
+    if keyboard.isDown "return"
+        State.current = State.playing
+
+update_died = (dt) ->
+    if keyboard.isDown "return"
+        print("Restarting") --TODO
+
+update_fishing = (dt) -> Fishing\update dt
+
 next_spawn = 0
 time_between_spawn = 4
+update_game = (dt) ->
+    next_spawn -= dt
+    if next_spawn < 0
+        next_spawn = time_between_spawn
+        World\add_entity Perch Vec2(love.graphics.getWidth!, 100), Vec2(-100, math.random(-100, 100))
+    Background\update dt
+    World\update dt, total_t
+    Combo\update dt
+
 love.update = (dt) ->
     total_t += dt
     State\update_transition dt
     if State.current == State.main_menu
-        if keyboard.isDown "return"
-            State.current = State.playing
+        update_main_menu dt
     elseif State.current == State.died
-        if keyboard.isDown "return"
-            print("Restarting") --TODO
-    elseif State.current == State.playing or State.current == State.fishing
-        if not prev_f and keyboard.isDown "f"
-            prev_f = true
-            State\reset_transition!
-            State.current = State.fishing
-        if prev_f and not keyboard.isDown "f"
-            prev_f = false
-        if State.current == State.fishing
-            Fishing\update dt
-        else
-            next_spawn -= dt
-            if next_spawn < 0
-                next_spawn = time_between_spawn
-                World\add_entity Perch Vec2(love.graphics.getWidth!, 100), Vec2(-100, math.random(-100, 100))
-
-            Background\update dt
-            World\update dt, total_t
-            Combo\update dt
+        update_died dt
+    elseif State.current == State.fishing
+        update_fishing dt
+    elseif State.current == State.playing
+        update_game dt
 
 love.draw = ->
     if State.current == State.main_menu
