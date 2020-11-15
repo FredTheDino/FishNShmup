@@ -54,8 +54,8 @@ export class Assets
         @load_img("water_part_2")
         @load_img("water_part_3")
 
-        -- TODO(ed): Load this stuff
-        -- @load_sfx("laser_sound.wav")
+        @load_sound("laser_sound.wav") --friendly
+        @load_sound("pewpew.wav") --enemy
 
         larger_font = love.graphics.newFont 20
         love.graphics.setFont larger_font
@@ -64,6 +64,10 @@ export class Assets
         img = love.graphics.newImage name..".png"
         img\setFilter "nearest", "nearest"
         @load_ass name, img
+
+    @load_sound: (name) =>
+        sound = love.sound.newSoundData name
+        @load_ass name, sound
 
     @load_ass: (name, a) =>
         assert @@assets[name] == nil, "Loading asset "..name.." twice!"

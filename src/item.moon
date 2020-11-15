@@ -13,10 +13,21 @@ class Item extends Entity
     update: (delta) =>
         @pos = @pos\add @dir\scale delta*100
 
+    draw: =>
+        super\draw!
+        gfx.draw @img, @pos.x - 20, @pos.y - 20
+
     on_collision: =>
 
-export class GenericPickupItem extends Item
+export class FishingItem extends Item
+    new: =>
+        super!
+        @radius = 20
+        @img = Assets\get "rod"
+
     on_collision: (other) =>
         if other.player
             @alive = false
-            print("item picked up")
+            Fishing\new_game!
+            State\reset_transition!
+            State.current = State.fishing

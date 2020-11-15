@@ -6,16 +6,17 @@ entity_overlap = (a, b) ->
 
 export class World
     @entities = {}
+    @gone_fishing = false
 
     @draw: =>
         for e in *@@entities
             if e.alive
                 e\draw!
 
-    @update: (delta) =>
+    @update: (delta, total_time) =>
         for e in *@@entities
             if e.alive
-                e\update delta
+                e\update delta, total_time
         @@\filter_alive!
 
     @filter_alive: =>

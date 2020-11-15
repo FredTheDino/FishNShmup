@@ -1,4 +1,5 @@
 gfx = love.graphics
+audio = love.audio
 
 class Enemy extends Entity
     new: (pos) =>
@@ -10,8 +11,13 @@ class Enemy extends Entity
         @shoottimer = 0
         @health = 3
         @color = { 1.0, 0.0, 1.0 }
+        @shot_sound = audio.newSource Assets\get "pewpew.wav"
+
+    fire_sound: =>
+        @shot_sound\clone!\play!
 
     fire: =>
+        @fire_sound!
         World\add_entity Shot @pos, Vec2(-1, 0), 500, @, @radius
 
     try_fire: =>
@@ -121,6 +127,7 @@ export class Whale extends Enemy
         @ship_alt = math.random(1, 2)
     
     fire: =>
+        @fire_sound!
         World\add_entity Shot @pos, Vec2(-2, 0), 500, @, @radius
         World\add_entity Shot @pos, Vec2(-2, -1), 500, @, @radius
         World\add_entity Shot @pos, Vec2(-2, 1), 500, @, @radius
@@ -169,9 +176,11 @@ export class Cod extends Enemy
         @burst_spacing = 0.0
 
     fire: =>
+        @fire_sound!
         World\add_entity Shot @pos, Vec2(-1, random_real(-1, 1)), 500, @, @radius
 
     try_fire: =>
+        super\fire!
         if @shoottimer > 0
             return
         if @burst == 0
@@ -211,6 +220,7 @@ export class Flounder extends Enemy
         @vel = Vec2 -100, 0
 
     fire: =>
+        @fire_sound!
         World\add_entity Shot @pos, Vec2(0, -1), 500, @, @radius
         World\add_entity Shot @pos, Vec2(0, 1), 500, @, @radius
 
@@ -226,6 +236,7 @@ export class Perch extends Enemy
         super pos
 
     fire: =>
+        @fire_sound!
         delta_pos = World.player.pos\sub @pos
         World\add_entity Shot @pos, delta_pos, 500, @, @radius
 
