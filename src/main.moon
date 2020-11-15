@@ -23,7 +23,6 @@ love.load = (arg) ->
     Fishing\load!
     Combo\reset!
     World\add_entity Player!
-    World\add_entity ShootSpeedItem!
     gfx.setBackgroundColor 238 / 255, 223 / 255, 203 / 255
 
     for i = 1, 4

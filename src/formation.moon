@@ -18,7 +18,9 @@ quarter = (n) ->
 formation_table = {
     {
         length: 200,
-        spawn: {}
+        spawn: {
+            { ShootSpeedItem, center_y, 0 },
+        }
     },
 
     {
@@ -48,6 +50,7 @@ formation_table = {
             { Pike, top_third, 200 },
             { Pike, bot_third, 200 },
             { Pike, center_y, 100 },
+            { FishingItem, center_y, 0 },
         }
     },
 

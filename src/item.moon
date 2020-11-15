@@ -1,13 +1,13 @@
 gfx = love.graphics
 
 class Item extends Entity
-    new: =>
+    new: (pos) =>
         super!
         @item = true
         @radius = 10
-        @pos = Vec2 600, 300
+        @pos = pos
         math.randomseed(os.time())
-        @dir = (Vec2 random_real(-1, -0.5), random_real(-1, 1))\normalized!
+        @dir = (Vec2 random_real(-2, -2), random_real(-1, 1))\normalized!
         @color = { 0, 1.0, 1.0 }
         @img = nil
         @img_offset = Vec2 0, 0
@@ -23,8 +23,8 @@ class Item extends Entity
     on_collision: =>
 
 export class FishingItem extends Item
-    new: =>
-        super!
+    new: (pos) =>
+        super pos
         @radius = 20
         @img = Assets\get "rod"
         @img_offset = Vec2 -20, -20
@@ -39,8 +39,8 @@ export class FishingItem extends Item
             State.current = State.fishing
 
 export class ShootSpeedItem extends Item
-    new: =>
-        super!
+    new: (pos) =>
+        super pos
         @radius = 20
         @img = Assets\get "fish_3"
         @img_scale = 1.8
