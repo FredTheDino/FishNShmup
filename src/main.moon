@@ -12,6 +12,7 @@ require "background"
 
 require "fishing"
 require "state"
+require "formation"
 
 gfx = love.graphics
 keyboard = love.keyboard
@@ -51,13 +52,11 @@ update_died = (dt) ->
 
 update_fishing = (dt) -> Fishing\update dt
 
-next_spawn = 0
-time_between_spawn = 4
 update_game = (dt) ->
-    next_spawn -= dt
-    if next_spawn < 0
-        next_spawn = time_between_spawn
-        World\add_entity Perch Vec2(love.graphics.getWidth!, 100), Vec2(-100, math.random(-100, 100))
+    if done_spawning_enemies!
+        1 + 1 -- We are done spawning, so winning is possible
+    update_spawner!
+
     Background\update dt
     World\update dt, total_t
     Combo\update dt
