@@ -55,7 +55,7 @@ update_fishing = (dt, total_t) -> Fishing\update dt, total_t
 update_game = (dt) ->
     if done_spawning_enemies!
         1 + 1 -- We are done spawning, so winning is possible
-    update_spawner!
+    update_spawner dt
 
     Background\update dt
     World\update dt, total_t

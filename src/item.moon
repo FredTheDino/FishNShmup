@@ -50,3 +50,9 @@ export class ShootSpeedItem extends Item
         if other.player
             @alive = false
             other\increase_shoot_speed!
+
+items = { FishingItem, ShootSpeedItem }
+export random_item = ->
+    i = math.random 1, #items
+    print(i, items[i])
+    items[i]

@@ -3,6 +3,11 @@ gfx = love.graphics
 
 target_score = 500
 
+x_pos = -> gfx.getWidth! + 30
+
+center_y = ->
+    Vec2(x_pos!, gfx.getHeight! / 2)
+
 export class Fishing
     @target = 0.5
     @current = 0.5
@@ -99,6 +104,7 @@ export class Fishing
             State.fishing_music\stop!
             State.main_music\play!
             State\reset_transition!
+            World\add_entity random_item! center_y!
             State.current = State.playing
 
         @@ship_target = @@ship_base\add Vec2 50 * @@current, 0

@@ -19,7 +19,7 @@ formation_table = {
     {
         length: 200,
         spawn: {
-            { ShootSpeedItem, center_y, 0 },
+            { FishingItem, center_y, 0 },
         }
     },
 
@@ -63,6 +63,7 @@ formation_table = {
         length: 300,
         spawn: {
             { Salmon, center_y, 0 },
+            { FishingItem, center_y, 100 },
         }
     },
 
@@ -91,6 +92,7 @@ formation_table = {
             { Pike, bot_third, 0 },
             { Pike, top_third, 0 },
             { Pike, center_y, 0 },
+            { FishingItem, center_y, 0 },
         }
     },
 
@@ -109,6 +111,7 @@ formation_table = {
             { Pike, bot_third, 0 },
             { Whale, top_third, 125 },
             { Whale, bot_third, 100 },
+            { FishingItem, center_y, 0 },
         }
     },
 
@@ -125,6 +128,7 @@ formation_table = {
             { Salmon, bot_third, 50 },
             { Salmon, bot_third, 100 },
             { Salmon, bot_third, 150 },
+            { FishingItem, center_y, 0 },
         }
     },
 
@@ -151,6 +155,7 @@ formation_table = {
             { Salmon, top_third, 50 },
             { Salmon, top_third, 100 },
             { Salmon, top_third, 150 },
+            { FishingItem, center_y, 0 },
         }
     },
 
@@ -161,6 +166,7 @@ formation_table = {
             { Eel, center_y, 50 },
             { Eel, center_y, 100 },
             { Eel, center_y, 150 },
+            { FishingItem, center_y, 0 },
         }
     },
 }
@@ -169,8 +175,8 @@ current_formation = nil
 last_formation = 0
 left = 0
 offset = 0
-export update_spawner = ->
-    if left == 0
+export update_spawner = (delta) ->
+    if left <= 0
         last_formation += 1
         current_formation = formation_table[last_formation]
         if current_formation
@@ -180,12 +186,12 @@ export update_spawner = ->
     if current_formation
         for spawn in *current_formation.spawn
             t = spawn[3]
-            if t == offset
+            if offset <= t and offset + 60 * delta >= t
                 fish = spawn[1]
                 pos = spawn[2]!
                 World\add_entity fish pos
 
-        left -= 1
-        offset += 1
+        left -= 60 * delta
+        offset += 60 * delta
 
 export done_spawning_enemies = -> current_formation == nil and last_formation != 0

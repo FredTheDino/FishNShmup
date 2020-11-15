@@ -50,7 +50,7 @@ export class Shot extends Entity
 
     update: (delta) =>
         @pos = @pos\add @vel\scale delta
-        @lifetime -= 1
+        @lifetime -= 60 * delta
         if @lifetime < 0
             @alive = false
 
