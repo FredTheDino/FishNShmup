@@ -1,4 +1,5 @@
 gfx = love.graphics
+audio = love.audio
 
 class Enemy extends Entity
     new: (pos, vel) =>
@@ -10,8 +11,12 @@ class Enemy extends Entity
         @shoottimer = 0
         @health = 3
         @color = { 1.0, 0.0, 1.0 }
+        @shot_sound = audio.newSource Assets\get "pewpew.wav"
 
     fire: =>
+        if @shoottimer > 0
+            return
+        @shot_sound\clone!\play! --TODO lower sound when out of screen
 
     damage: (dmg) =>
         @health -= dmg
@@ -39,6 +44,7 @@ class Enemy extends Entity
 
 export class ShootingEnemy extends Enemy
     fire: =>
+        super\fire!
         if @shoottimer > 0
             return
         @shoottimer = @fire_rate

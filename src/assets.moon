@@ -24,8 +24,8 @@ export class Assets
         @load_img("ship.png")
         @load_img("shield.png")
         @load_img("tmp_engine.png")
-        @load_sound("laser_sound.wav")
-
+        @load_sound("laser_sound.wav") --friendly
+        @load_sound("pewpew.wav") --enemy
         larger_font = love.graphics.newFont 20
         love.graphics.setFont larger_font
 
