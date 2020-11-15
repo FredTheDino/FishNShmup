@@ -23,15 +23,16 @@ love.load = (arg) ->
     World\add_entity Player!
     World\add_entity FishingItem!
     gfx.setBackgroundColor 238 / 255, 223 / 255, 203 / 255
+    World\add_entity Perch Vec2(gfx.getWidth! * 2, gfx.getHeight!)\div(2)
 
     for i = 1, 4
-        Background\add_bg_layer Background "bg_cloud_"..i..".png",
+        Background\add_bg_layer Background "bg_cloud_"..i,
                                            1.2,
                                            700,
                                            1200,
                                            1.8
     for i = 1, 5
-        Background\add_bg_layer Background "bg_part_"..i..".png",
+        Background\add_bg_layer Background "bg_part_"..i,
                                            1.2,
                                            120,
                                            120,
@@ -64,7 +65,7 @@ love.update = (dt) ->
             next_spawn -= dt
             if next_spawn < 0
                 next_spawn = time_between_spawn
-                World\add_entity ShootingEnemy Vec2(love.graphics.getWidth!, 100), Vec2(-100, math.random(-100, 100))
+                World\add_entity Perch Vec2(love.graphics.getWidth!, 100), Vec2(-100, math.random(-100, 100))
 
             Background\update dt
             World\update dt, total_t

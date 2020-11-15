@@ -5,8 +5,9 @@ export class Shot extends Entity
         super!
         @radius = 10
         @lifetime = 100
+        dir = dir\normalized!
         @pos = pos\add dir\scale offset + @radius
-        @vel = dir\normalized!\scale(vel)
+        @vel = dir\scale(vel)
         @owner = owner
         @color = { 0, 0, 1.0 }
 

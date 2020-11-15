@@ -23,7 +23,7 @@ export class FishingItem extends Item
     new: =>
         super!
         @radius = 20
-        @img = Assets\get "rod.png"
+        @img = Assets\get "rod"
 
     on_collision: (other) =>
         if other.player

@@ -1,6 +1,8 @@
 keyboard = love.keyboard
 gfx = love.graphics
 
+target_score = 500
+
 export class Fishing
     @target = 0.5
     @current = 0.5
@@ -40,9 +42,9 @@ export class Fishing
     @line_curve = nil
 
     @load: =>
-        @@ship_img = Assets\get "ship.png"
-        @@rod_img = Assets\get "rod.png"
-        @@float_img = Assets\get "float.png"
+        @@ship_img = Assets\get "ship"
+        @@rod_img = Assets\get "rod"
+        @@float_img = Assets\get "float"
 
         @@update_bezier!
 
@@ -84,8 +86,8 @@ export class Fishing
 
         if @@score < 0
             @@score = 0
-        if @@score > 500
-            World.gone_fishing = false
+        if @@score > target_score
+            State.current = State.playing
 
         @@ship_target = @@ship_base\add Vec2 50 * @@current, 0
 
