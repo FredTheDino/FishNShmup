@@ -166,7 +166,25 @@ formation_table = {
             { Eel, center_y, 50 },
             { Eel, center_y, 100 },
             { Eel, center_y, 150 },
-            { FishingItem, center_y, 0 },
+            { FishingItem, center_y, 250 },
+        }
+    },
+
+    {
+        length: 300,
+        spawn: {
+            { Whale, bot_third, 100 },
+            { Eel, top_third, 0 },
+        }
+    },
+
+
+    {
+        length: 300,
+        spawn: {
+            { Cod, center_y, 0 },
+            { Cod, center_y, 50 },
+            { Cod, center_y, 100 },
         }
     },
 
@@ -180,7 +198,7 @@ offset = 0
 
 export start_formation = ->
     current_formation = nil
-    last_formation = 0
+    last_formation = 9
     left = 0
     offset = 0
 

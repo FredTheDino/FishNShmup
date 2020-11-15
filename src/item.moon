@@ -16,6 +16,9 @@ class Item extends Entity
     update: (delta) =>
         @pos = @pos\add @dir\scale delta*100
 
+        if @pos.x < -@radius
+            @alive = false
+
     draw: =>
         super\draw!
         gfx.draw @img, @pos.x + @img_offset.x, @pos.y + @img_offset.y, 0, @img_scale, @img_scale
@@ -93,5 +96,4 @@ export class ShootSpeedItem extends Item
 items = { FishingItem, ShootSpeedItem, ShootBurstItem }
 export random_item = ->
     i = math.random 1, #items
-    print(i, items[i])
     items[i]

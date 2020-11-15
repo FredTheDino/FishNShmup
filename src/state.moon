@@ -34,7 +34,7 @@ export class State
     @draw_main_menu: =>
         draw_centerd "logo", -100, 2
         -- TODO(ed): Press space to start
-        draw_centerd "press_space"
+        draw_centerd "press_space", 10
 
         if @highscore
             gfx.setColor 0, 0, 0
@@ -46,9 +46,6 @@ export class State
     @start_playing: =>
         State.current = State.playing
         start_formation!
-        last_formation = 0
-        left = 0
-        offset = 0
         Combo\reset_start!
         World\reset!
         World\add_entity Player!
