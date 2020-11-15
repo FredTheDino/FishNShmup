@@ -24,6 +24,8 @@ export class Assets
         @load_img("fish_1")
         @load_img("fish_2")
         @load_img("fish_3")
+        @load_img("fish_4")
+        @load_img("fish_5")
         @load_img("float")
         @load_img("laser_1")
         @load_img("laser_1_part_1")

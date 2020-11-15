@@ -10,14 +10,25 @@ export class Player extends Entity
         @draw_offset = Vec2(48, -40)
         @speed = 256
         @shoottimer = 0
-        @fire_rate = 0.2
-        @fire_rate_incd = 0.1
-        @fire_rate_incd_timer = 0
         @health = 3
         @img = Assets\get "ship"
         @shield_img = Assets\get "shield"
         @shot_sfx = audio.newSource Assets\get "laser_sound.wav"
         @die_sfx = audio.newSource Assets\get "explosion_dead.wav"
+
+        @fire_rate = 0.2
+
+        @fire_rate_incd = 0.1
+        @fire_rate_incd_timer = 0
+
+        @fire_burst_rate = 0.8
+        @fire_burst_timer = 0
+
+        @fire_triple_rate = 0.25
+        @fire_triple_timer = 0
+
+        @missile_rate = 1.0
+        @missile_amount = 0
 
         @engine_particles = gfx.newParticleSystem Assets\get "laser_2_part_1"
         @engine_particles\setColors 1.0, 1.0, 1.0, 1.0,
@@ -79,13 +90,36 @@ export class Player extends Entity
             e\damage 1
 
     fire: =>
+        -- multiple items at the same time wont work as expected
         if @shoottimer > 0
             return
         if @fire_rate_incd_timer > 0
             @shoottimer = @fire_rate_incd
+        elseif @fire_burst_timer > 0
+            @shoottimer = @fire_burst_rate
+        elseif @fire_triple_timer > 0
+            @shoottimer = @fire_triple_rate
+        elseif @missile_amount > 0
+            @shoottimer = @missile_rate
         else
             @shoottimer = @fire_rate
-        World\add_entity Shot @pos, Vec2(1, @vely * 0.2), 500, @, @radius + 5
+        if @fire_burst_timer > 0
+            World\add_entity Shot @pos, Vec2(1, @vely * 0.2), 500, @, @radius + 5
+            World\add_entity Shot @pos, Vec2(1, @vely * 0.2 + random_real(0.0, 0.2)), 500, @, @radius + 5
+            World\add_entity Shot @pos, Vec2(1, @vely * 0.2 - random_real(0.0, 0.2)), 500, @, @radius + 5
+            World\add_entity Shot @pos, Vec2(1, @vely * 0.2 + random_real(0.2, 0.4)), 500, @, @radius + 5
+            World\add_entity Shot @pos, Vec2(1, @vely * 0.2 - random_real(0.2, 0.4)), 500, @, @radius + 5
+            World\add_entity Shot @pos, Vec2(1, @vely * 0.2 + random_real(0.4, 0.6)), 500, @, @radius + 5
+            World\add_entity Shot @pos, Vec2(1, @vely * 0.2 - random_real(0.4, 0.6)), 500, @, @radius + 5
+        elseif @fire_triple_timer > 0
+            World\add_entity Shot @pos, Vec2(1, @vely * 0.2), 500, @, @radius + 5
+            World\add_entity Shot @pos, Vec2(1, @vely * 0.2 + 0.5), 500, @, @radius + 5
+            World\add_entity Shot @pos, Vec2(1, @vely * 0.2 - 0.5), 500, @, @radius + 5
+        elseif @missile_amount > 0
+            @missile_amount -= 1
+            World\add_entity Missile @pos, Vec2(1, @vely * 0.2), 500, @, @radius + 5
+        else
+            World\add_entity Shot @pos, Vec2(1, @vely * 0.2), 500, @, @radius + 5
         @shot_sfx\clone!\play!
 
     damage: (dmg) =>
@@ -124,6 +158,16 @@ export class Player extends Entity
             if @fire_rate_incd_timer < 0
                 @fire_rate_incd_timer = 0
 
+        if @fire_burst_timer > 0
+            @fire_burst_timer -= delta
+            if @fire_burst_timer < 0
+                @fire_burst_timer = 0
+
+        if @fire_triple_timer > 0
+            @fire_triple_timer -= delta
+            if @fire_triple_timer < 0
+                @fire_triple_timer = 0
+
         @shoottimer -= delta
         if keyboard.isDown "space"
             @fire!
@@ -145,3 +189,12 @@ export class Player extends Entity
 
     increase_shoot_speed: =>
         @fire_rate_incd_timer += 3
+
+    burst_shooting: =>
+        @fire_burst_timer += 4
+
+    triple_shooting: =>
+        @fire_triple_timer += 4
+
+    load_missiles: (amount) =>
+        @missile_amount += amount

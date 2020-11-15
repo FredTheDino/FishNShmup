@@ -19,7 +19,7 @@ formation_table = {
     {
         length: 200,
         spawn: {
-            { FishingItem, center_y, 0 },
+            { ShootMissileItem, center_y, 0 },
         }
     },
 

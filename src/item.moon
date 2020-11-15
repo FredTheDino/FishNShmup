@@ -38,7 +38,7 @@ export class FishingItem extends Item
             State.fishing_music\play!
             State.current = State.fishing
 
-export class ShootSpeedItem extends Item
+export class ShootBurstItem extends Item
     new: (pos) =>
         super pos
         @radius = 20
@@ -49,9 +49,48 @@ export class ShootSpeedItem extends Item
     on_collision: (other) =>
         if other.player
             @alive = false
+            other\burst_shooting!
+
+export class ShootTripleItem extends Item
+    new: (pos) =>
+        super pos
+        @radius = 20
+        @img = Assets\get "fish_5"
+        @img_scale = 1.4
+        @img_offset = Vec2 -14, -30
+
+    on_collision: (other) =>
+        if other.player
+            @alive = false
+            other\triple_shooting!
+
+export class ShootMissileItem extends Item
+    new: (pos) =>
+        super pos
+        @radius = 20
+        @img = Assets\get "fish_2"
+        @img_scale = 1.4
+        @img_offset = Vec2 -10, -24
+
+    on_collision: (other) =>
+        if other.player
+            @alive = false
+            other\load_missiles 3
+
+export class ShootSpeedItem extends Item
+    new: (pos) =>
+        super pos
+        @radius = 20
+        @img = Assets\get "fish_4"
+        @img_scale = 1.6
+        @img_offset = Vec2 -24, -18
+
+    on_collision: (other) =>
+        if other.player
+            @alive = false
             other\increase_shoot_speed!
 
-items = { FishingItem, ShootSpeedItem }
+items = { FishingItem, ShootSpeedItem, ShootBurstItem }
 export random_item = ->
     i = math.random 1, #items
     print(i, items[i])
