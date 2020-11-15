@@ -28,7 +28,6 @@ export class Player extends Entity
         @engine_particles\start!
 
         @engine_particles_smoke = gfx.newParticleSystem Assets\get "laser_2_part_1"
-
         @engine_particles_smoke\setSizes 4.0, 4.5, 8.5, 9.0
         @engine_particles_smoke\setColors 0.0, 0.0, 0.0, 0.5, 0.0, 0.0, 0.0, 0.45, 0.0, 0.0, 0.0, 0.0
         @engine_particles_smoke\setSpread 1
