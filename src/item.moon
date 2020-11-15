@@ -101,6 +101,11 @@ export class PointItem extends Item
         @img_scale = 2.0
         @img_offset = Vec2 -13, -26
 
+    update: (pos) =>
+        super pos
+        delta_pos = World.player.pos\sub @pos
+        @dir = delta_pos\normalized!
+
     on_collision: (other) =>
         if other.player
             @alive = false

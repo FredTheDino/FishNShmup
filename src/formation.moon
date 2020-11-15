@@ -425,6 +425,12 @@ formation_table = {
         }
     },
 
+    {
+        length: 700,
+        spawn: {
+            { PointItem, center_y, 0 },
+        }
+    },
 
     { length: 500, spawn: {} }
 }
@@ -436,7 +442,7 @@ offset = 0
 
 export start_formation = ->
     current_formation = nil
-    last_formation = 31
+    last_formation = 32
     left = 0
     offset = 0
 
