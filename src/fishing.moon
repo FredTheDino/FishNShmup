@@ -1,7 +1,7 @@
 keyboard = love.keyboard
 gfx = love.graphics
 
-target_score = 500
+target_score = 750
 
 x_pos = -> gfx.getWidth! + 30
 
@@ -64,7 +64,7 @@ export class Fishing
     @new_game: (difficulty = 1) =>
         @@current = 0.5
         @@total_t = 0
-        @@score = 0
+        @@score = 100
 
         @@bar_width = @@difficulties[difficulty][1]
         @@sin_speed = @@difficulties[difficulty][2]
@@ -72,6 +72,11 @@ export class Fishing
         @@bar_start = 0.5 - @@bar_width
         @@bar_end = 0.5 + @@bar_width
 
+    @end_game: =>
+        State.fishing_music\stop!
+        State.main_music\play!
+        State\reset_transition!
+        State.current = State.playing
 
     @update: (delta, total_t) =>
         if keyboard.isDown "1"
@@ -98,14 +103,11 @@ export class Fishing
         elseif @@score > 0
             @@score -= 2
 
-        if @@score < 0
-            @@score = 0
+        if @@score == 0
+            @@end_game!
         if @@score > target_score
-            State.fishing_music\stop!
-            State.main_music\play!
-            State\reset_transition!
             World\add_entity random_item! center_y!
-            State.current = State.playing
+            @@end_game!
 
         @@ship_target = @@ship_base\add Vec2 50 * @@current, 0
 
@@ -122,11 +124,13 @@ export class Fishing
 
         @@update_bezier total_t
 
+    @noise = 0
     @update_bezier: (total_t) =>
         @@rod_target = Vec2 @@ship_target.x + @@ship_draw_offset.x - 115,
                             @@ship_target.y + @@ship_draw_offset.y - 35
 
-        @@float_target = @@float_base\add Vec2 0, math.sin(3 * total_t) * 8
+        @noise = (@noise + random_real(-30, 30)) * 0.5
+        @@float_target = @@float_base\add Vec2 0, math.sin(3 * total_t + @noise) * 8
 
         if not @@line_curve
             @@line_curve = love.math.newBezierCurve @@rod_target.x, @@rod_target.y,
