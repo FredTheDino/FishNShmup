@@ -154,15 +154,15 @@ export class Fishing
 
 
         -- left outer
-        gfx.setColor 1.0, 0.0, 0.0
+        gfx.setColor 147 / 255, 35 / 255, 41 / 255
         gfx.rectangle "fill", @@box.x, @@box.y, @@box_w * @@bar_start, @@box_h
 
         -- middle
-        gfx.setColor 0.0, 0.8, 0.0
+        gfx.setColor 109 / 255, 83 / 255, 120 / 255
         gfx.rectangle "fill", @@box.x + @@box_w * @@bar_start, @@box.y, @@box_w * @@bar_end, @@box_h
 
         -- right outer
-        gfx.setColor 1.0, 0.0, 0.0
+        gfx.setColor 147 / 255, 35 / 255, 41 / 255
         gfx.rectangle "fill", @@box.x + @@box_w * @@bar_end, @@box.y, @@box_w * @@bar_start, @@box_h
 
         -- outer box
