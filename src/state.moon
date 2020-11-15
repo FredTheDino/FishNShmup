@@ -8,14 +8,21 @@ export class State
     @fishing = 3
     @trans_total = 0.15
     @trans_cur = 0
+    @muted = false
 
     @current = @main_menu
 
     @load: =>
         @@main_music = audio.newSource Assets\get "retro-funk.mp3"
         @@main_music\setLooping true
-        @@main_music\setVolume 0.5
         @@fishing_music = audio.newSource Assets\get "fishing.mp3"
+
+    @set_mute: =>
+        @@main_music\setVolume 0.0
+        @@fishing_music\setVolume 0.0
+
+    @set_unmute: =>
+        @@main_music\setVolume 0.5
         @@fishing_music\setVolume 0.8
 
     @draw_main_menu: =>
@@ -41,3 +48,10 @@ export class State
                             pos_x-300-100, gfx.getHeight!+10,
                             pos_x-100, gfx.getHeight!+10
         gfx.setColor 1.0, 1.0, 1.0, 1.0
+
+    @toggle_mute: =>
+        @@muted = not @@muted
+        if @@muted
+            @set_mute!
+        else
+            @set_unmute!

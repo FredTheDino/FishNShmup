@@ -43,7 +43,6 @@ love.load = (arg) ->
     State.main_music\play!
 
 total_t = 0
-prev_f = false --TODO framework?
 
 update_main_menu = (dt) ->
     if keyboard.isDown "return"
@@ -64,9 +63,15 @@ update_game = (dt) ->
     World\update dt, total_t
     Combo\update dt
 
+prev_m_press = false --TODO framework?
 love.update = (dt) ->
     total_t += dt
     State\update_transition dt
+
+    if keyboard.isDown"m" and not prev_m_press
+        State\toggle_mute!
+    prev_m_press = keyboard.isDown "m"
+
     if State.current == State.main_menu
         update_main_menu dt
     elseif State.current == State.died
