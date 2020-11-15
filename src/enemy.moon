@@ -12,11 +12,13 @@ class Enemy extends Entity
         @health = 3
         @color = { 1.0, 0.0, 1.0 }
         @shot_sound = audio.newSource Assets\get "pewpew.wav"
+        @hit_sound = audio.newSource Assets\get "hit.wav"
+        @hit_sound\setVolume(0.7)
 
     fire_sound: =>
         sfx = @shot_sound\clone!
         sfx\setPitch random_real 0.80, 0.90
-        sfx\setVolume random_real 0.95, 1.00
+        sfx\setVolume random_real 0.8, 0.9
         sfx\play!
 
     fire: =>
@@ -31,6 +33,7 @@ class Enemy extends Entity
 
     damage: (dmg) =>
         @health -= dmg
+        @hit_sound\clone!\play!
         if @health < 0
             @alive = false
 
