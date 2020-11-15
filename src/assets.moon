@@ -24,7 +24,8 @@ export class Assets
         @load_img("ship.png")
         @load_img("shield.png")
         @load_img("tmp_engine.png")
-
+        @load_sound("laser_sound.wav") --friendly
+        @load_sound("pewpew.wav") --enemy
         larger_font = love.graphics.newFont 20
         love.graphics.setFont larger_font
 
@@ -33,6 +34,10 @@ export class Assets
         img\setFilter "nearest", "nearest"
         @load_ass name, img
 
+    @load_sound: (name) =>
+        sound = love.sound.newSoundData name
+        @load_ass name, sound
+
     @load_ass: (name, a) =>
         assert @@assets[name] == nil, "Loading asset "..name.." twice!"
         @@assets[name] = a
@@ -40,5 +45,3 @@ export class Assets
     @get: (name) =>
         assert @@assets[name], "Invalid asset name "..name.."."
         @@assets[name]
-
-{ :Assets }
