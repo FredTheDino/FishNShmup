@@ -43,6 +43,7 @@ next_spawn = 0
 time_between_spawn = 4
 love.update = (dt) ->
     total_t += dt
+    State\update_transition dt
     if State.current == State.main_menu
         if keyboard.isDown "return"
             State.current = State.playing
@@ -52,7 +53,8 @@ love.update = (dt) ->
     elseif State.current == State.playing or State.current == State.fishing
         if not prev_f and keyboard.isDown "f"
             prev_f = true
-            World.gone_fishing = not World.gone_fishing
+            State\reset_transition!
+            State.current = State.fishing
         if prev_f and not keyboard.isDown "f"
             prev_f = false
         if State.current == State.fishing
@@ -72,7 +74,7 @@ love.draw = ->
         State\draw_main_menu!
     elseif State.current == State.died
         State\draw_died!
-    elseif State.playing
+    elseif State.current == State.playing
         Background\draw!
         World\draw!
         Combo\draw!
@@ -80,3 +82,4 @@ love.draw = ->
         Fishing\draw!
     else
         print("Invalid state", State.current)
+    State\draw_transition!
